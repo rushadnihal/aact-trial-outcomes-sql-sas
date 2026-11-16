@@ -85,14 +85,3 @@ run;
 proc export data=work.late_or
   outfile="&root./output/late_odds_ratios.csv" dbms=csv replace;
 run;
-
-/* proportional hazards check (no clustering, to keep the resampling valid) */
-data work.rep_ph;
-  set aact.rep(where=(likely_applicable=1));
-  if ranuni(2026) < 0.25;
-run;
-proc phreg data=work.rep_ph;
-  class &classvars. / param=ref ref=first order=freq;
-  model time_days*event(0) = &classvars. &numvars. / ties=efron;
-  assess ph / resample=200 npaths=10 seed=2026;
-run;
