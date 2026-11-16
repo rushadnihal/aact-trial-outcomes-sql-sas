@@ -36,7 +36,7 @@ WHERE NOT EXISTS (SELECT 1 FROM ctgov.sponsors s
 -- Per-trial flags. Flags do not delete rows; each analysis states which
 -- flags it excludes (see docs/decisions.md).
 -- ---------------------------------------------------------------------
-DROP VIEW IF EXISTS analysis.quality_flags;
+DROP VIEW IF EXISTS analysis.quality_flags CASCADE;
 CREATE VIEW analysis.quality_flags AS
 SELECT f.nct_id,
        COALESCE(f.primary_completion_date < f.start_date, FALSE)

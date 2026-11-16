@@ -19,8 +19,8 @@ CREATE SCHEMA IF NOT EXISTS analysis;
 -- ---------------------------------------------------------------------
 -- Base: one row per study with the fields used to define the cohort
 -- ---------------------------------------------------------------------
-DROP VIEW IF EXISTS analysis.cohort_base;
-DROP VIEW IF EXISTS analysis.study_base;
+DROP VIEW IF EXISTS analysis.cohort_base CASCADE;   -- also drops dependent views (quality_flags, model_*); rerun 04 and 05
+DROP VIEW IF EXISTS analysis.study_base CASCADE;
 
 CREATE VIEW analysis.study_base AS
 SELECT s.nct_id,
