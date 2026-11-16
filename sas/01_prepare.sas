@@ -34,6 +34,7 @@ libname outdir clear;
     length allocation intervention_model primary_purpose masking gender
            healthy_volunteers $32 us_site $8 start_period $9;
     set &in.;
+    format _character_;                 /* clear imported display formats ($6. etc. truncated labels) */
     array cat{*} allocation intervention_model primary_purpose masking
                  gender healthy_volunteers;
     do i = 1 to dim(cat);
@@ -65,6 +66,7 @@ libname outdir clear;
 data aact.rep;
   length allocation masking primary_purpose $32 us_site fda_reg $8 start_period $9;
   set work.rep_raw;
+  format _character_;                   /* clear imported display formats */
   array cat{*} allocation masking primary_purpose;
   do i = 1 to dim(cat);
     if missing(cat{i}) then cat{i} = 'MISSING';
