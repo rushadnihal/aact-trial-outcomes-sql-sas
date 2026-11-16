@@ -13,7 +13,7 @@
 
 \set snapshot_date '2026-11-15'
 
-DROP TABLE IF EXISTS analysis.features;
+DROP TABLE IF EXISTS analysis.features CASCADE;  -- also drops analysis.quality_flags; rerun 04 afterwards
 
 CREATE TABLE analysis.features AS
 WITH lead_sponsor AS (
@@ -63,6 +63,9 @@ SELECT c.nct_id,
        c.primary_completion_date,
        c.results_first_posted_date,
        c.days_to_results,
+       c.results_first_submitted_date,
+       (c.results_first_submitted_date IS NOT NULL)                          AS results_submitted_flag,
+       (c.results_first_submitted_date - c.primary_completion_date)           AS days_to_submission,
        cv.months_to_report_results,
        cv.were_results_reported,
        -- design and registration predictors

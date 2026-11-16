@@ -11,3 +11,6 @@ config.local.*
 # OS / editor
 .DS_Store
 .Rhistory
+
+# Regenerable exports (public registry data; rebuilt by sql/05)
+output/*.csv

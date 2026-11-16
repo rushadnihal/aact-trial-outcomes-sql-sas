@@ -41,7 +41,7 @@ CREATE VIEW analysis.quality_flags AS
 SELECT f.nct_id,
        COALESCE(f.primary_completion_date < f.start_date, FALSE)
          AS flag_pcd_before_start,
-       COALESCE(f.results_first_posted_date < f.primary_completion_date, FALSE)
+       COALESCE(f.results_first_submitted_date < f.primary_completion_date, FALSE)
          AS flag_results_before_pcd,
        COALESCE(f.primary_completion_date > :'snapshot_date'::date
                 AND f.overall_status = 'COMPLETED', FALSE)
@@ -68,7 +68,7 @@ FROM t,
 LATERAL (VALUES
   ('primary completion before start date',
      (SELECT count(*) FROM analysis.quality_flags WHERE flag_pcd_before_start)),
-  ('results posted before primary completion',
+  ('results submitted before primary completion',
      (SELECT count(*) FROM analysis.quality_flags WHERE flag_results_before_pcd)),
   ('COMPLETED but primary completion after snapshot',
      (SELECT count(*) FROM analysis.quality_flags WHERE flag_completed_pcd_after_snapshot)),
@@ -93,11 +93,14 @@ WHERE flag_pcd_before_start OR flag_results_before_pcd
    OR flag_completed_pcd_after_snapshot OR flag_missing_pcd;
 
 \echo ''
-\echo '=== 4. Cross-check: our days_to_results vs AACT months_to_report_results (posted trials only) ==='
+\echo '=== 4. Cross-check against AACT months_to_report_results (trials with results) ==='
+\echo 'If AACT measures completion to SUBMISSION, the submission-based difference should be near 0 and the posting-based one larger.'
 SELECT count(*) AS n_compared,
-       round(avg(abs(days_to_results / 30.4375 - months_to_report_results))::numeric, 2) AS mean_abs_diff_months,
-       count(*) FILTER (WHERE abs(days_to_results / 30.4375 - months_to_report_results) > 2) AS n_diff_gt_2_months
+       round(avg(abs(days_to_submission / 30.4375 - months_to_report_results))::numeric, 2) AS mean_abs_diff_months_submission,
+       round(avg(abs(days_to_results    / 30.4375 - months_to_report_results))::numeric, 2) AS mean_abs_diff_months_posting,
+       count(*) FILTER (WHERE abs(days_to_submission / 30.4375 - months_to_report_results) > 2) AS n_diff_gt_2_months_submission
 FROM analysis.features
-WHERE results_posted_flag
+WHERE results_submitted_flag
+  AND days_to_submission IS NOT NULL
   AND days_to_results IS NOT NULL
   AND months_to_report_results IS NOT NULL;

@@ -47,11 +47,31 @@ Indexes did not survive the selective restore; 00b_indexes.sql rebuilds them.
 - Late reporting = results first posted more than 12 months after primary completion.
 - WITHDRAWN trials are excluded from the primary termination model and reported as a sensitivity analysis.
 
+## Correction to the reporting definition (2026-11-16)
+The legal deadline is for **submitting** results, not for posting them; posting follows after review. A first run using the posting date gave an implausibly low on-time rate (7% overall, 13% for US FDA-regulated trials), and the posting-based timing differed from AACT's own months_to_report_results by 4.5 months on average, consistent with the review lag. All reporting outcomes now use `results_first_submitted_date`:
+- On time = results first submitted within 12 months of primary completion.
+- Time to event = submission minus primary completion; trials with no submission are censored at the snapshot date.
+- The posting date is kept only for descriptive tables.
+
 ## Findings that shape the modelling
 - **Enrollment is not a valid predictor of termination.** AACT keeps one enrollment value, which becomes the actual count at completion; terminated trials have a median of 24 against 100 for completed ones. That is a consequence of the outcome, so it is described but left out of the termination model (reverse causation / leakage). Planned enrollment is not available in this snapshot.
 - **Rising termination share by start year (about 15% for 2008-2016 to 21-23% for 2019-2022) is partly a selection effect.** Only resolved trials are kept; for recent starts, short trials and early terminations resolve first. Plan: sensitivity analysis restricted to earlier start years (for example 2008-2018) and a time-to-termination model.
 - **is_fda_regulated_drug is 54.6% missing** (field exists for newer registrations only). The reporting-applicability flag uses has_us_facility (5.7% missing); FDA-regulated is a subset sensitivity analysis.
+- **Sponsor-level variation is large** (for example 0.7% to 34% terminated among sponsors with at least 50 trials), so models use sponsor-clustered standard errors (or a sponsor random effect).
+- **Recent-year reporting rates are right-censored** (ever-posted falls from 93% for 2017 starts to 75% for 2022 starts); the time-to-event model handles this.
 - Descriptive signals (not yet adjusted): oncology 25.5% terminated vs infectious 14.4%; Phase 2 20.1% vs Phase 3 13.7%; industry 15.8%, other 19.9%, other government 9.5%.
+
+## Cleaning rules (counts from 04_quality_checks.sql, cohort of 46,801)
+| Rule | Affected | Action |
+|---|---|---|
+| Primary completion before start date | 8 | Excluded from the reporting dataset |
+| Results posted before primary completion (99; recomputed on submission date in the next run) | 99 | Excluded from the reporting dataset |
+| Completed or terminated with missing primary completion | 33 | Excluded from the reporting dataset |
+| Completed with completion after snapshot | 0 | None needed |
+| Terminated without why_stopped | 639 | Kept; reason is not a model input |
+| Unknown sponsor class | 8 | Excluded from both datasets |
+| Completed with enrollment 0 | 2 | Kept; enrollment is not a termination predictor |
+| Duplicated nct_id, or trials with several lead sponsors | 0 | None needed |
 
 ## Log
 - 2026-11-16: question confirmed; snapshot restored and row count verified.

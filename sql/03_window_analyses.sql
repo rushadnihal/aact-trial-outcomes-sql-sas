@@ -2,7 +2,7 @@
 -- 03_window_analyses.sql
 -- Purpose : Window-function analyses: sponsor rankings, rolling and
 --           year-over-year termination rates, and time from primary
---           completion to results posting (percentiles, on-time rates).
+--           completion to results submission (percentiles, on-time rates).
 -- Inputs  : analysis.features
 -- Outputs : Result tables (printed; save the log to logs/)
 -- Snapshot: AACT 2026-11-15
@@ -51,6 +51,7 @@ ORDER BY start_year;
 \echo ''
 \echo '=== 3. Results reporting by sponsor class (trials with >= 12 months of follow-up) ==='
 \echo 'Eligible: COMPLETED or TERMINATED, primary completion date present and at least 12 months before the snapshot.'
+\echo 'On time = results first SUBMITTED within 12 months of primary completion (the legal deadline is submission, not posting).'
 WITH e AS (
   SELECT f.*,
          (primary_completion_date + INTERVAL '12 months')::date AS due_date
@@ -61,16 +62,17 @@ WITH e AS (
 )
 SELECT sponsor_class,
        count(*) AS n_eligible,
-       round(100.0 * count(*) FILTER (WHERE results_posted_flag) / count(*), 1) AS pct_ever_posted,
-       round(100.0 * count(*) FILTER (WHERE results_first_posted_date <= due_date) / count(*), 1) AS pct_posted_within_12m,
+       round(100.0 * count(*) FILTER (WHERE results_submitted_flag) / count(*), 1) AS pct_ever_submitted,
+       round(100.0 * count(*) FILTER (WHERE results_posted_flag) / count(*), 1)    AS pct_ever_posted,
+       round(100.0 * count(*) FILTER (WHERE results_first_submitted_date <= due_date) / count(*), 1) AS pct_submitted_within_12m,
        percentile_cont(ARRAY[0.25, 0.5, 0.75, 0.9])
-         WITHIN GROUP (ORDER BY days_to_results) FILTER (WHERE results_posted_flag) AS days_to_results_q25_50_75_90
+         WITHIN GROUP (ORDER BY days_to_submission) FILTER (WHERE results_submitted_flag) AS days_to_submission_q25_50_75_90
 FROM e
 GROUP BY sponsor_class
 ORDER BY n_eligible DESC;
 
 \echo ''
-\echo '=== 4. On-time reporting by start year, trials with a US facility ==='
+\echo '=== 4. On-time submission by start year, trials with a US facility ==='
 WITH e AS (
   SELECT f.*,
          (primary_completion_date + INTERVAL '12 months')::date AS due_date
@@ -82,14 +84,14 @@ WITH e AS (
 )
 SELECT start_year,
        count(*) AS n_eligible,
-       round(100.0 * count(*) FILTER (WHERE results_first_posted_date <= due_date) / count(*), 1) AS pct_posted_within_12m,
-       round(100.0 * count(*) FILTER (WHERE results_posted_flag) / count(*), 1)                   AS pct_ever_posted
+       round(100.0 * count(*) FILTER (WHERE results_first_submitted_date <= due_date) / count(*), 1) AS pct_submitted_within_12m,
+       round(100.0 * count(*) FILTER (WHERE results_submitted_flag) / count(*), 1)                   AS pct_ever_submitted
 FROM e
 GROUP BY start_year
 ORDER BY start_year;
 
 \echo ''
-\echo '=== 5. On-time reporting by US facility and FDA-regulated flag (same eligibility) ==='
+\echo '=== 5. On-time submission by US facility and FDA-regulated flag (same eligibility) ==='
 WITH e AS (
   SELECT f.*,
          (primary_completion_date + INTERVAL '12 months')::date AS due_date
@@ -101,7 +103,7 @@ WITH e AS (
 SELECT COALESCE(has_us_facility::text, 'missing')       AS has_us_facility,
        COALESCE(is_fda_regulated_drug::text, 'missing') AS is_fda_regulated_drug,
        count(*) AS n_eligible,
-       round(100.0 * count(*) FILTER (WHERE results_first_posted_date <= due_date) / count(*), 1) AS pct_posted_within_12m
+       round(100.0 * count(*) FILTER (WHERE results_first_submitted_date <= due_date) / count(*), 1) AS pct_submitted_within_12m
 FROM e
 GROUP BY 1, 2
 ORDER BY 1, 2;
