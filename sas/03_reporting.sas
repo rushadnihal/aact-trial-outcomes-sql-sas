@@ -63,17 +63,6 @@ proc phreg data=aact.rep covs(aggregate);
   ods output ParameterEstimates=work.cox_all;
 run;
 
-/* proportional hazards check (no clustering, to keep the resampling valid) */
-data work.rep_ph;
-  set aact.rep(where=(likely_applicable=1));
-  if ranuni(2026) < 0.25;
-run;
-proc phreg data=work.rep_ph;
-  class &classvars. / param=ref ref=first order=freq;
-  model time_days*event(0) = &classvars. &numvars. / ties=efron;
-  assess ph / resample=200 npaths=10 seed=2026;
-run;
-
 /* ---- late reporting (more than 12 months or never), >= 12 months follow-up ---- */
 proc surveylogistic data=aact.rep(where=(likely_applicable=1 and eligible_12m=1));
   class &classvars. / param=ref ref=first order=freq;
@@ -95,4 +84,15 @@ run;
 
 proc export data=work.late_or
   outfile="&root./output/late_odds_ratios.csv" dbms=csv replace;
+run;
+
+/* proportional hazards check (no clustering, to keep the resampling valid) */
+data work.rep_ph;
+  set aact.rep(where=(likely_applicable=1));
+  if ranuni(2026) < 0.25;
+run;
+proc phreg data=work.rep_ph;
+  class &classvars. / param=ref ref=first order=freq;
+  model time_days*event(0) = &classvars. &numvars. / ties=efron;
+  assess ph / resample=200 npaths=10 seed=2026;
 run;
