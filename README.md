@@ -6,6 +6,13 @@ A reproducible SQL (PostgreSQL) and SAS analysis of ClinicalTrials.gov registry 
 
 > Results are descriptive associations, not causal effects. Related published analyses exist; this is an updated, reproducible analysis on a fixed snapshot, not a first-of-its-kind claim.
 
+## Skills demonstrated
+
+- **PostgreSQL:** scripted cohort flow with CTEs, window functions (`rank`, `ntile`, `lag`, rolling sums, `percentile_cont`), views, indexing, data quality checks, and a one-command pipeline (`run_all.sh`) with a saved log for every script.
+- **SAS:** PROC SURVEYLOGISTIC with sponsor-clustered standard errors, PROC LOGISTIC (ROC and AUC), PROC LIFETEST (Kaplan-Meier, log-rank), PROC PHREG with robust variance, and ODS graphics.
+- **Statistical practice:** a fixed data snapshot, documented cleaning rules with record counts, sensitivity analyses, a proportional-hazards check, and findings that are reported as not robust when they change between analyses.
+- **Reproducibility and honesty:** a decisions log that records a corrected outcome definition, and limitations stated up front.
+
 ## Headline results
 
 | Outcome | Population | Main finding |
