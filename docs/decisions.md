@@ -2,6 +2,8 @@
 
 Snapshot: **AACT 2026-11-15** (postgres.dmp). Every number in the README refers to this snapshot.
 
+> **How to read this file.** It is a chronological log. Early sections ("Proposed defaults", "Outcome definitions (draft)", "Confirmed by owner") record the plan *before* the first run and use the posting date for reporting outcomes; that definition was superseded by the "Correction to the reporting definition" section. The final definitions are in the README ("Methods in brief") and the final counts in "Cleaning rules" and "Results".
+
 ## Research question
 What predicts early termination, and late or missing results reporting, among interventional drug trials registered on ClinicalTrials.gov?
 Results are descriptive associations, not causal. Related published analyses exist; this is an updated, reproducible analysis, not a first-of-its-kind claim.

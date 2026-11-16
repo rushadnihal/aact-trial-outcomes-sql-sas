@@ -93,9 +93,11 @@ Cleaning rules and counts are in [`docs/decisions.md`](docs/decisions.md).
 
 ## Reproducing
 
-1. Download the PostgreSQL dump for 2026-11-15 from https://aact.ctti-clinicaltrials.org/downloads and restore the 14 study-level tables listed in `docs/decisions.md` into a local database `aact` (schema `ctgov`).
-2. Run all SQL: `bash run_all.sh` (asks for the Postgres password once, writes logs to `logs/`, exports the three model datasets to `output/`).
-3. Upload `output/model_*.csv` and `sas/*.sas` to a SAS OnDemand for Academics folder named `aact`, then run in order: `01_prepare.sas`, `02_termination.sas`, `03_reporting.sas`, and optionally `03b_ph_check.sas`.
+1. **Get the data.** Download the PostgreSQL dump from https://aact.ctti-clinicaltrials.org/downloads and restore the 14 study-level tables listed in `docs/decisions.md` into a local database `aact` (schema `ctgov`). AACT refreshes daily and its downloads page offers the latest snapshot; older static copies are listed on AACT's archive page, and monthly copies of the pipe-delimited export are also deposited on Zenodo. A snapshot other than 2026-11-15 will give somewhat different counts and estimates, because registrations and results keep being added. To confirm you have the same data, check that `SELECT count(*) FROM ctgov.studies` returns 611,764 and that the cohort flow in `logs/01.log` matches the table below.
+2. **Run all SQL:** `bash run_all.sh` (asks for the Postgres password once, writes logs to `logs/`, exports the three model datasets to `output/`).
+3. **Run SAS:** upload `output/model_*.csv` and `sas/*.sas` to a SAS OnDemand for Academics folder named `aact`, then run in order: `01_prepare.sas`, `02_termination.sas`, `03_reporting.sas`, and optionally `03b_ph_check.sas`.
+
+Database used: PostgreSQL 18 on macOS. Results in this repository were produced by one run of this pipeline on the 2026-11-15 snapshot.
 
 ## Structure
 
@@ -108,3 +110,7 @@ docs/     decisions, definitions and cleaning rules
 ```
 
 Raw data and dumps are not stored in this repository.
+
+## License and data
+
+Code is released under the [MIT License](LICENSE). The analysis uses public ClinicalTrials.gov registry data distributed by AACT (CTTI); no registry data are redistributed here, only aggregate results.
