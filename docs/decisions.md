@@ -29,5 +29,20 @@ Results are descriptive associations, not causal. Related published analyses exi
 - Selective restore of 14 study-level tables (results-detail tables skipped). Database size 2.9 GB. `ctgov.studies` = 611,764 rows.
 - Tables restored: studies, sponsors, designs, conditions, browse_conditions, interventions, browse_interventions, design_groups, calculated_values, countries, eligibilities, id_information, responsible_parties, keywords.
 
+## Cohort results (snapshot 2026-11-15)
+Flow: 611,764 registered, 466,855 interventional, 116,384 Phase 2/2-3/3, 102,981 with a drug or biological intervention, 102,005 with a start date, 60,840 started 2008-2022, 46,801 with final status COMPLETED, TERMINATED or WITHDRAWN.
+Cohort: 36,431 completed (77.8%), 7,734 terminated (16.5%), 2,636 withdrawn (5.6%).
+Raw results posting: 55.9% of completed, 62.1% of terminated. This mixes trials that must report with trials that do not, so the model needs a US or FDA-regulated flag.
+Date checks inside the cohort: 8 with primary completion before start, 99 with results posted before primary completion, 19 with primary completion after the snapshot. Rules for these go in 04_quality_checks.sql.
+Indexes did not survive the selective restore; 00b_indexes.sql rebuilds them.
+
+## Outcome definitions (draft, to confirm)
+- Early termination: COMPLETED = 0, TERMINATED = 1. WITHDRAWN trials never enrolled, so they are a separate outcome category (sensitivity analysis), not part of the primary model.
+- Results reporting due date: 12 months after primary completion date (US requirement, window starts 2008 because the law took effect in late 2007).
+- Late reporting: results first posted more than 12 months after primary completion. Trials with primary completion less than 12 months before the snapshot are excluded from the binary late-reporting outcome.
+- Time to results (Kaplan-Meier, Cox): event = results first posted; trials without results are censored at the snapshot date 2026-11-15.
+- Applicability flag: use is_fda_regulated_drug and has_us_facility; check how complete is_fda_regulated_drug is for trials started before 2017.
+
 ## Log
 - 2026-11-16: question confirmed; snapshot restored and row count verified.
+- 2026-11-16: indexes built; cohort defined (46,801 trials); features script added.
