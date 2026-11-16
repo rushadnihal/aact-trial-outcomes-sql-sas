@@ -2,6 +2,7 @@
 -- 05_analysis_dataset.sql
 -- Purpose : Final modelling views and CSV exports for SAS.
 --           model_termination : COMPLETED vs TERMINATED (logistic model)
+--           term_base / model_termination_sens : adds WITHDRAWN (sensitivity)
 --           model_reporting   : time from primary completion to results
 --                               submission, censored at the snapshot date
 --                               (Kaplan-Meier, Cox) plus a binary late flag
@@ -19,7 +20,7 @@
 
 \set snapshot_date '2026-11-15'
 
-DROP VIEW IF EXISTS analysis.model_termination;
+DROP VIEW IF EXISTS analysis.term_base CASCADE;   -- also drops model_termination
 DROP VIEW IF EXISTS analysis.model_reporting;
 
 -- ---------------------------------------------------------------------
@@ -27,9 +28,11 @@ DROP VIEW IF EXISTS analysis.model_reporting;
 -- Rule: COMPLETED or TERMINATED only (WITHDRAWN is a sensitivity analysis);
 --       drops 8 trials with unknown sponsor class.
 -- ---------------------------------------------------------------------
-CREATE VIEW analysis.model_termination AS
+CREATE VIEW analysis.term_base AS
 SELECT f.nct_id,
+       f.overall_status,
        f.terminated_flag,
+       (f.overall_status <> 'COMPLETED')::int AS any_stop_flag,   -- sensitivity outcome: terminated or withdrawn
        f.sponsor_name,
        f.sponsor_class,
        f.phase,
@@ -41,26 +44,31 @@ SELECT f.nct_id,
        f.n_arms,
        f.n_primary_outcomes,
        f.n_interventions,
-       f.has_biological,
-       f.has_other_type,
+       f.has_biological::int AS has_biological,
+       f.has_other_type::int AS has_other_type,
        f.n_countries,
-       f.has_us_facility,
+       f.has_us_facility::int AS has_us_facility,
        f.gender,
        f.healthy_volunteers,
-       CASE lower(f.minimum_age_unit)
-            WHEN 'years'  THEN f.minimum_age_num::numeric
-            WHEN 'months' THEN f.minimum_age_num / 12.0
-            WHEN 'weeks'  THEN f.minimum_age_num / 52.18
-            WHEN 'days'   THEN f.minimum_age_num / 365.25
-            WHEN 'hours'  THEN f.minimum_age_num / 8766.0
-            WHEN 'minutes' THEN f.minimum_age_num / 525960.0
+       CASE WHEN lower(f.minimum_age_unit) LIKE 'year%'   THEN f.minimum_age_num::numeric
+            WHEN lower(f.minimum_age_unit) LIKE 'month%'  THEN f.minimum_age_num / 12.0
+            WHEN lower(f.minimum_age_unit) LIKE 'week%'   THEN f.minimum_age_num / 52.18
+            WHEN lower(f.minimum_age_unit) LIKE 'day%'    THEN f.minimum_age_num / 365.25
+            WHEN lower(f.minimum_age_unit) LIKE 'hour%'   THEN f.minimum_age_num / 8766.0
+            WHEN lower(f.minimum_age_unit) LIKE 'minute%' THEN f.minimum_age_num / 525960.0
        END AS min_age_years,
-       f.area_oncology, f.area_cns, f.area_cardiovascular, f.area_infectious,
-       f.area_metabolic, f.area_respiratory, f.area_immune
+       f.area_oncology::int AS area_oncology, f.area_cns::int AS area_cns,
+       f.area_cardiovascular::int AS area_cardiovascular, f.area_infectious::int AS area_infectious,
+       f.area_metabolic::int AS area_metabolic, f.area_respiratory::int AS area_respiratory,
+       f.area_immune::int AS area_immune
 FROM analysis.features f
 JOIN analysis.quality_flags q USING (nct_id)
-WHERE f.terminated_flag IS NOT NULL
+WHERE f.overall_status IN ('COMPLETED', 'TERMINATED', 'WITHDRAWN')
   AND NOT q.flag_unknown_sponsor_class;
+
+-- Primary termination model: COMPLETED vs TERMINATED
+CREATE VIEW analysis.model_termination AS
+SELECT * FROM analysis.term_base WHERE terminated_flag IS NOT NULL;
 
 -- ---------------------------------------------------------------------
 -- Results-reporting dataset
@@ -81,17 +89,21 @@ SELECT f.nct_id,
        f.sponsor_class,
        f.phase,
        f.start_year,
-       f.has_us_facility,
-       f.is_fda_regulated_drug,
+       f.has_us_facility::int AS has_us_facility,
+       f.is_fda_regulated_drug::int AS is_fda_regulated_drug,
+       -- proxy for the US reporting requirement: US facility and not marked non-FDA-regulated
+       (COALESCE(f.has_us_facility, FALSE) AND COALESCE(f.is_fda_regulated_drug, TRUE))::int AS likely_applicable,
        f.allocation,
        f.masking,
        f.primary_purpose,
        f.n_arms,
        f.n_primary_outcomes,
        f.n_countries,
-       f.has_biological,
-       f.area_oncology, f.area_cns, f.area_cardiovascular, f.area_infectious,
-       f.area_metabolic, f.area_respiratory, f.area_immune,
+       f.has_biological::int AS has_biological,
+       f.area_oncology::int AS area_oncology, f.area_cns::int AS area_cns,
+       f.area_cardiovascular::int AS area_cardiovascular, f.area_infectious::int AS area_infectious,
+       f.area_metabolic::int AS area_metabolic, f.area_respiratory::int AS area_respiratory,
+       f.area_immune::int AS area_immune,
        f.primary_completion_date,
        f.results_first_submitted_date,
        EXTRACT(YEAR FROM f.primary_completion_date)::int AS completion_year,
@@ -100,7 +112,7 @@ SELECT f.nct_id,
             ELSE (:'snapshot_date'::date - f.primary_completion_date)
        END AS time_days,
        f.results_submitted_flag::int AS event,
-       (f.primary_completion_date <= (:'snapshot_date'::date - INTERVAL '12 months')::date) AS eligible_12m,
+       (f.primary_completion_date <= (:'snapshot_date'::date - INTERVAL '12 months')::date)::int AS eligible_12m,
        CASE WHEN f.primary_completion_date <= (:'snapshot_date'::date - INTERVAL '12 months')::date
             THEN (NOT f.results_submitted_flag
                   OR f.results_first_submitted_date > (f.primary_completion_date + INTERVAL '12 months')::date)::int
@@ -150,8 +162,18 @@ CROSS JOIN LATERAL jsonb_each(to_jsonb(m)) AS kv
 GROUP BY kv.key HAVING count(*) FILTER (WHERE kv.value = 'null'::jsonb) > 0
 ORDER BY n_null DESC;
 
+\echo ''
+\echo '=== Minimum age units seen (check that min_age_years is now populated) ==='
+SELECT minimum_age_unit, count(*) AS n,
+       count(*) FILTER (WHERE min_age_years IS NOT NULL) AS n_min_age_years
+FROM (SELECT f.minimum_age_unit, m.min_age_years
+      FROM analysis.features f
+      JOIN analysis.model_termination m USING (nct_id)) x
+GROUP BY 1 ORDER BY n DESC;
+
 -- ---------------------------------------------------------------------
 -- Exports for SAS (written to output/ on this computer; not committed)
 -- ---------------------------------------------------------------------
 \copy (SELECT * FROM analysis.model_termination ORDER BY nct_id) TO 'output/model_termination.csv' CSV HEADER
+\copy (SELECT * FROM analysis.term_base ORDER BY nct_id) TO 'output/model_termination_sens.csv' CSV HEADER
 \copy (SELECT * FROM analysis.model_reporting ORDER BY nct_id) TO 'output/model_reporting.csv' CSV HEADER

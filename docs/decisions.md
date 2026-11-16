@@ -53,6 +53,16 @@ The legal deadline is for **submitting** results, not for posting them; posting 
 - Time to event = submission minus primary completion; trials with no submission are censored at the snapshot date.
 - The posting date is kept only for descriptive tables.
 
+## Results-reporting checks (after the submission-date fix)
+- Submission-based timing agrees with AACT months_to_report_results (mean absolute difference 0.34 months; posting-based 4.46).
+- On time (submitted within 12 months): industry 29.9%, other 16.7%, NIH 45.1%; US-facility and FDA-regulated 45.7% vs 7.5-10% where neither applies; trend among US-facility trials 18.7% (2008 starts) to about 47-50% (2020-2021 starts).
+- Applicability proxy `likely_applicable` = US facility and not marked non-FDA-regulated (is_fda_regulated_drug missing is treated as possibly applicable because the field only exists for newer registrations). Main reporting analyses use this subset; the all-trials model is a comparison.
+
+## Model specification (SAS)
+- Termination: logistic regression, COMPLETED vs TERMINATED, sponsor-clustered robust SEs (PROC SURVEYLOGISTIC), AUC and Hosmer-Lemeshow from PROC LOGISTIC. Predictors: sponsor class, phase, start period, allocation, intervention model, primary purpose, masking, US site, sex eligibility, arms, primary outcomes, interventions, countries, biological, other intervention type, six therapeutic-area flags. Enrollment excluded. Reference level = most frequent level.
+- Sensitivity: start year <= 2018; withdrawn counted as early stops.
+- Reporting: Kaplan-Meier (cumulative submission) by sponsor class and start period; Cox with robust sponsor-clustered variance; logistic model for late (> 12 months or never) among trials with >= 12 months of follow-up; proportional hazards check by resampling.
+
 ## Findings that shape the modelling
 - **Enrollment is not a valid predictor of termination.** AACT keeps one enrollment value, which becomes the actual count at completion; terminated trials have a median of 24 against 100 for completed ones. That is a consequence of the outcome, so it is described but left out of the termination model (reverse causation / leakage). Planned enrollment is not available in this snapshot.
 - **Rising termination share by start year (about 15% for 2008-2016 to 21-23% for 2019-2022) is partly a selection effect.** Only resolved trials are kept; for recent starts, short trials and early terminations resolve first. Plan: sensitivity analysis restricted to earlier start years (for example 2008-2018) and a time-to-termination model.
@@ -65,13 +75,15 @@ The legal deadline is for **submitting** results, not for posting them; posting 
 | Rule | Affected | Action |
 |---|---|---|
 | Primary completion before start date | 8 | Excluded from the reporting dataset |
-| Results posted before primary completion (99; recomputed on submission date in the next run) | 99 | Excluded from the reporting dataset |
+| Results submitted before primary completion | 149 | Excluded from the reporting dataset |
 | Completed or terminated with missing primary completion | 33 | Excluded from the reporting dataset |
 | Completed with completion after snapshot | 0 | None needed |
 | Terminated without why_stopped | 639 | Kept; reason is not a model input |
 | Unknown sponsor class | 8 | Excluded from both datasets |
 | Completed with enrollment 0 | 2 | Kept; enrollment is not a termination predictor |
 | Duplicated nct_id, or trials with several lead sponsors | 0 | None needed |
+
+Analysis populations (05_analysis_dataset.sql): termination dataset 44,157 trials (7,734 terminated); reporting dataset 43,975 trials (25,024 submissions); 190 trials hit at least one date flag.
 
 ## Log
 - 2026-11-16: question confirmed; snapshot restored and row count verified.
