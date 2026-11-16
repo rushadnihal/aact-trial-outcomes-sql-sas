@@ -147,7 +147,7 @@ UNION ALL
 SELECT 6, '   with results submitted by the snapshot (events)', count(*) FILTER (WHERE event = 1)
   FROM analysis.model_reporting
 UNION ALL
-SELECT 7, '   with >= 12 months follow-up (late_12m defined)', count(*) FILTER (WHERE eligible_12m)
+SELECT 7, '   with >= 12 months follow-up (late_12m defined)', count(*) FILTER (WHERE eligible_12m = 1)
   FROM analysis.model_reporting
 UNION ALL
 SELECT 8, '   late_12m = 1', count(*) FILTER (WHERE late_12m = 1)
