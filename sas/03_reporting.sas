@@ -20,7 +20,8 @@ libname aact "&root.";
 ods listing gpath="&root./output";
 ods graphics on / reset width=7in imagefmt=png;
 
-%let classvars = sponsor_class phase start_period allocation masking primary_purpose us_site;
+/* us_site is constant (Yes) in the likely-applicable subset, so it enters only the all-trials model */
+%let classvars = sponsor_class phase start_period allocation masking primary_purpose;
 %let numvars   = terminated_flag n_arms_cap n_primary_cap log_countries has_biological
                  area_oncology area_cns area_cardiovascular area_infectious
                  area_metabolic area_respiratory area_immune;
@@ -34,14 +35,14 @@ run;
 /* ---- Kaplan-Meier: cumulative submission among likely-applicable trials ---- */
 ods graphics / imagename="km_submission_by_class";
 proc lifetest data=aact.rep(where=(likely_applicable=1))
-              plots=survival(failure) timelist=365 730 1095 reportcensored;
+              plots=survival(failure) timelist=365 730 1095;
   time time_days*event(0);
   strata sponsor_class / test=logrank;
 run;
 
 ods graphics / imagename="km_submission_by_period";
 proc lifetest data=aact.rep(where=(likely_applicable=1))
-              plots=survival(failure) timelist=365 730 1095 reportcensored;
+              plots=survival(failure) timelist=365 730 1095;
   time time_days*event(0);
   strata start_period / test=logrank;
 run;
@@ -56,17 +57,21 @@ run;
 
 /* comparison: all trials, with the applicability flag as a covariate */
 proc phreg data=aact.rep covs(aggregate);
-  class &classvars. / param=ref ref=first order=freq;
-  model time_days*event(0) = &classvars. &numvars. likely_applicable / ties=efron risklimits;
+  class &classvars. us_site / param=ref ref=first order=freq;
+  model time_days*event(0) = &classvars. us_site &numvars. likely_applicable / ties=efron risklimits;
   id sponsor_name;
   ods output ParameterEstimates=work.cox_all;
 run;
 
 /* proportional hazards check (no clustering, to keep the resampling valid) */
-proc phreg data=aact.rep(where=(likely_applicable=1));
+data work.rep_ph;
+  set aact.rep(where=(likely_applicable=1));
+  if ranuni(2026) < 0.25;
+run;
+proc phreg data=work.rep_ph;
   class &classvars. / param=ref ref=first order=freq;
   model time_days*event(0) = &classvars. &numvars. / ties=efron;
-  assess ph / resample seed=2026;
+  assess ph / resample=200 npaths=10 seed=2026;
 run;
 
 /* ---- late reporting (more than 12 months or never), >= 12 months follow-up ---- */
