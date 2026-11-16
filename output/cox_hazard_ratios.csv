@@ -1,0 +1,82 @@
+analysis,Parameter,ClassVal0,DF,Estimate,StdErr,StdErrRatio,ChiSq,ProbChiSq,HazardRatio,HRLowerCL,HRUpperCL,Label
+Likely applicable,sponsor_class,OTHER,1,0.69326,0.05785,2.994,143.6314,<.0001,2.000,1.786,2.240,sponsor_class OTHER
+Likely applicable,sponsor_class,NIH,1,0.97436,0.11960,2.985,66.3679,<.0001,2.649,2.096,3.349,sponsor_class NIH
+Likely applicable,sponsor_class,NETWORK,1,0.63001,0.19271,2.672,10.6876,0.0011,1.878,1.287,2.739,sponsor_class NETWORK
+Likely applicable,sponsor_class,FED,1,0.33396,0.41398,4.597,0.6508,0.4198,1.396,0.620,3.144,sponsor_class FED
+Likely applicable,sponsor_class,INDIV,1,-0.13468,0.34604,1.824,0.1515,0.6971,0.874,0.444,1.722,sponsor_class INDIV
+Likely applicable,sponsor_class,OTHER_GOV,1,-0.90894,0.64910,1.127,1.9608,0.1614,0.403,0.113,1.438,sponsor_class OTHER_GOV
+Likely applicable,phase,PHASE3,1,0.23417,0.02730,1.533,73.5924,<.0001,1.264,1.198,1.333,phase PHASE3
+Likely applicable,phase,PHASE2/PHASE3,1,-0.04755,0.05203,1.357,0.8354,0.3607,0.954,0.861,1.056,phase PHASE2/PHASE3
+Likely applicable,start_period,2012-2015,1,0.35920,0.03215,1.640,124.8603,<.0001,1.432,1.345,1.525,start_period 2012-2015
+Likely applicable,start_period,2016-2019,1,0.75292,0.03741,1.880,405.1648,<.0001,2.123,1.973,2.285,start_period 2016-2019
+Likely applicable,start_period,2020-2022,1,0.84091,0.04782,1.972,309.2830,<.0001,2.318,2.111,2.546,start_period 2020-2022
+Likely applicable,allocation,NA,1,0.11754,0.03656,1.339,10.3383,0.0013,1.125,1.047,1.208,allocation NA
+Likely applicable,allocation,NON_RANDOMIZED,1,0.13264,0.04156,1.256,10.1879,0.0014,1.142,1.053,1.239,allocation NON_RANDOMIZED
+Likely applicable,allocation,MISSING,1,-0.17779,0.37768,1.975,0.2216,0.6378,0.837,0.399,1.755,allocation MISSING
+Likely applicable,masking,QUADRUPLE,1,-0.14732,0.03869,1.508,14.4953,0.0001,0.863,0.800,0.931,masking QUADRUPLE
+Likely applicable,masking,DOUBLE,1,-0.01774,0.05111,1.855,0.1205,0.7285,0.982,0.889,1.086,masking DOUBLE
+Likely applicable,masking,TRIPLE,1,-0.05071,0.04527,1.528,1.2544,0.2627,0.951,0.870,1.039,masking TRIPLE
+Likely applicable,masking,SINGLE,1,-0.21476,0.06318,1.329,11.5539,0.0007,0.807,0.713,0.913,masking SINGLE
+Likely applicable,masking,MISSING,1,-0.25071,0.25407,0.908,0.9738,0.3237,0.778,0.473,1.280,masking MISSING
+Likely applicable,primary_purpose,PREVENTION,1,0.02788,0.05487,1.736,0.2583,0.6113,1.028,0.923,1.145,primary_purpose PREVENTION
+Likely applicable,primary_purpose,DIAGNOSTIC,1,-0.17019,0.07891,1.328,4.6518,0.0310,0.844,0.723,0.985,primary_purpose DIAGNOSTIC
+Likely applicable,primary_purpose,SUPPORTIVE_CARE,1,-0.02200,0.06017,1.000,0.1337,0.7146,0.978,0.869,1.101,primary_purpose SUPPORTIVE_CARE
+Likely applicable,primary_purpose,OTHER,1,-0.00360,0.08078,1.192,0.0020,0.9645,0.996,0.851,1.167,primary_purpose OTHER
+Likely applicable,primary_purpose,BASIC_SCIENCE,1,-0.09344,0.09215,1.313,1.0281,0.3106,0.911,0.760,1.091,primary_purpose BASIC_SCIENCE
+Likely applicable,primary_purpose,MISSING,1,-0.11514,0.20288,1.414,0.3221,0.5704,0.891,0.599,1.326,primary_purpose MISSING
+Likely applicable,primary_purpose,HEALTH_SERVICES_RESEARCH,1,-0.08232,0.21331,0.951,0.1489,0.6996,0.921,0.606,1.399,primary_purpose HEALTH_SERVICES_RESEARCH
+Likely applicable,primary_purpose,SCREENING,1,-0.19287,0.35137,1.163,0.3013,0.5831,0.825,0.414,1.642,primary_purpose SCREENING
+Likely applicable,terminated_flag,,1,-0.09208,0.02738,1.524,11.3066,0.0008,0.912,0.864,0.962,
+Likely applicable,n_arms_cap,,1,-0.01727,0.00927,1.171,3.4735,0.0624,0.983,0.965,1.001,
+Likely applicable,n_primary_cap,,1,0.07648,0.01070,1.599,51.1319,<.0001,1.079,1.057,1.102,
+Likely applicable,log_countries,,1,0.34059,0.02075,1.919,269.4376,<.0001,1.406,1.350,1.464,
+Likely applicable,has_biological,,1,0.04660,0.04374,1.960,1.1353,0.2867,1.048,0.962,1.141,
+Likely applicable,area_oncology,,1,0.10839,0.03686,1.884,8.6475,0.0033,1.114,1.037,1.198,
+Likely applicable,area_cns,,1,0.02453,0.03181,1.612,0.5948,0.4406,1.025,0.963,1.091,
+Likely applicable,area_cardiovascular,,1,0.01028,0.03538,1.273,0.0845,0.7713,1.010,0.943,1.083,
+Likely applicable,area_infectious,,1,-0.02410,0.05470,1.982,0.1941,0.6596,0.976,0.877,1.087,
+Likely applicable,area_metabolic,,1,-0.04125,0.03774,1.657,1.1952,0.2743,0.960,0.891,1.033,
+Likely applicable,area_respiratory,,1,0.09475,0.04818,2.051,3.8672,0.0492,1.099,1.000,1.208,
+Likely applicable,area_immune,,1,0.12387,0.02865,1.358,18.6907,<.0001,1.132,1.070,1.197,
+All trials,sponsor_class,OTHER,1,-0.01875,0.10058,5.993,0.0347,0.8521,0.981,0.806,1.195,sponsor_class OTHER
+All trials,sponsor_class,NIH,1,0.62492,0.08763,2.317,50.8504,<.0001,1.868,1.573,2.218,sponsor_class NIH
+All trials,sponsor_class,OTHER_GOV,1,-1.62098,0.22674,1.396,51.1077,<.0001,0.198,0.127,0.308,sponsor_class OTHER_GOV
+All trials,sponsor_class,NETWORK,1,0.16444,0.19813,3.156,0.6889,0.4065,1.179,0.799,1.738,sponsor_class NETWORK
+All trials,sponsor_class,FED,1,0.12926,0.36702,4.277,0.1240,0.7247,1.138,0.554,2.336,sponsor_class FED
+All trials,sponsor_class,INDIV,1,-0.36485,0.30135,1.673,1.4659,0.2260,0.694,0.385,1.253,sponsor_class INDIV
+All trials,phase,PHASE3,1,0.23651,0.02714,1.821,75.9462,<.0001,1.267,1.201,1.336,phase PHASE3
+All trials,phase,PHASE2/PHASE3,1,-0.15627,0.04643,1.366,11.3267,0.0008,0.855,0.781,0.937,phase PHASE2/PHASE3
+All trials,start_period,2012-2015,1,0.21664,0.03357,2.009,41.6490,<.0001,1.242,1.163,1.326,start_period 2012-2015
+All trials,start_period,2016-2019,1,0.49765,0.03739,2.171,177.1831,<.0001,1.645,1.529,1.770,start_period 2016-2019
+All trials,start_period,2020-2022,1,0.51432,0.05283,2.491,94.7873,<.0001,1.673,1.508,1.855,start_period 2020-2022
+All trials,allocation,NA,1,0.23415,0.03236,1.369,52.3627,<.0001,1.264,1.186,1.347,allocation NA
+All trials,allocation,NON_RANDOMIZED,1,0.22629,0.03851,1.353,34.5299,<.0001,1.254,1.163,1.352,allocation NON_RANDOMIZED
+All trials,allocation,MISSING,1,-0.07283,0.32227,2.077,0.0511,0.8212,0.930,0.494,1.749,allocation MISSING
+All trials,masking,QUADRUPLE,1,-0.14085,0.03717,1.685,14.3577,0.0002,0.869,0.808,0.934,masking QUADRUPLE
+All trials,masking,DOUBLE,1,-0.01513,0.04775,2.041,0.1004,0.7513,0.985,0.897,1.082,masking DOUBLE
+All trials,masking,TRIPLE,1,-0.03459,0.04289,1.663,0.6506,0.4199,0.966,0.888,1.051,masking TRIPLE
+All trials,masking,SINGLE,1,-0.24308,0.05623,1.437,18.6851,<.0001,0.784,0.702,0.876,masking SINGLE
+All trials,masking,MISSING,1,-0.61215,0.31006,1.351,3.8980,0.0483,0.542,0.295,0.996,masking MISSING
+All trials,primary_purpose,PREVENTION,1,0.04834,0.06014,2.330,0.6462,0.4215,1.050,0.933,1.181,primary_purpose PREVENTION
+All trials,primary_purpose,DIAGNOSTIC,1,-0.18439,0.06982,1.260,6.9734,0.0083,0.832,0.725,0.954,primary_purpose DIAGNOSTIC
+All trials,primary_purpose,SUPPORTIVE_CARE,1,0.05055,0.06096,1.102,0.6876,0.4070,1.052,0.933,1.185,primary_purpose SUPPORTIVE_CARE
+All trials,primary_purpose,OTHER,1,0.07544,0.06722,1.131,1.2593,0.2618,1.078,0.945,1.230,primary_purpose OTHER
+All trials,primary_purpose,BASIC_SCIENCE,1,-0.01259,0.09116,1.393,0.0191,0.8902,0.987,0.826,1.181,primary_purpose BASIC_SCIENCE
+All trials,primary_purpose,MISSING,1,-0.23531,0.16080,1.391,2.1414,0.1434,0.790,0.577,1.083,primary_purpose MISSING
+All trials,primary_purpose,HEALTH_SERVICES_RESEARCH,1,-0.17514,0.18956,0.927,0.8536,0.3555,0.839,0.579,1.217,primary_purpose HEALTH_SERVICES_RESEARCH
+All trials,primary_purpose,SCREENING,1,-0.21715,0.27994,1.118,0.6017,0.4379,0.805,0.465,1.393,primary_purpose SCREENING
+All trials,us_site,No,1,-0.65242,0.24308,1.452,7.2038,0.0073,0.521,0.323,0.839,us_site No
+All trials,us_site,Unknown,1,0.73587,0.30815,1.809,5.7029,0.0169,2.087,1.141,3.818,us_site Unknown
+All trials,terminated_flag,,1,-0.03235,0.02412,1.467,1.7992,0.1798,0.968,0.923,1.015,
+All trials,n_arms_cap,,1,-0.00284,0.00895,1.318,0.1007,0.7510,0.997,0.980,1.015,
+All trials,n_primary_cap,,1,0.09893,0.01058,1.875,87.4421,<.0001,1.104,1.081,1.127,
+All trials,log_countries,,1,0.25717,0.02023,2.142,161.6524,<.0001,1.293,1.243,1.346,
+All trials,has_biological,,1,0.08299,0.04670,2.416,3.1578,0.0756,1.087,0.991,1.191,
+All trials,area_oncology,,1,0.13415,0.03764,2.173,12.7012,0.0004,1.144,1.062,1.231,
+All trials,area_cns,,1,0.07220,0.03093,1.764,5.4507,0.0196,1.075,1.012,1.142,
+All trials,area_cardiovascular,,1,0.02107,0.03609,1.470,0.3409,0.5593,1.021,0.952,1.096,
+All trials,area_infectious,,1,0.11161,0.05695,2.552,3.8404,0.0500,1.118,1.000,1.250,
+All trials,area_metabolic,,1,-0.00238,0.04109,2.050,0.0033,0.9539,0.998,0.920,1.081,
+All trials,area_respiratory,,1,0.09952,0.05306,2.636,3.5187,0.0607,1.105,0.996,1.226,
+All trials,area_immune,,1,0.14534,0.02753,1.497,27.8717,<.0001,1.156,1.096,1.221,
+All trials,likely_applicable,,1,1.04162,0.23065,1.380,20.3940,<.0001,2.834,1.803,4.454,

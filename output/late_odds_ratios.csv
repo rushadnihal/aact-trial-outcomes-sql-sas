@@ -1,0 +1,40 @@
+Effect,OddsRatioEst,LowerCL,UpperCL
+sponsor_class       OTHER     vs INDUSTRY,0.519,0.398,0.677
+sponsor_class       NIH       vs INDUSTRY,0.367,0.278,0.484
+sponsor_class       NETWORK   vs INDUSTRY,0.421,0.246,0.720
+sponsor_class       FED       vs INDUSTRY,0.720,0.294,1.765
+sponsor_class       INDIV     vs INDUSTRY,0.442,0.127,1.530
+sponsor_class       OTHER_GOV vs INDUSTRY,1.193,0.307,4.643
+phase               PHASE3        vs PHASE2,0.872,0.781,0.974
+phase               PHASE2/PHASE3 vs PHASE2,1.210,0.983,1.491
+start_period        2012-2015 vs 2008-2011,0.487,0.428,0.555
+start_period        2016-2019 vs 2008-2011,0.294,0.251,0.346
+start_period        2020-2022 vs 2008-2011,0.243,0.205,0.288
+allocation          NA             vs RANDOMIZED,0.903,0.788,1.035
+allocation          NON_RANDOMIZED vs RANDOMIZED,0.716,0.614,0.834
+allocation          MISSING        vs RANDOMIZED,0.466,0.187,1.160
+masking             QUADRUPLE vs NONE,1.449,1.240,1.693
+masking             DOUBLE    vs NONE,0.997,0.854,1.163
+masking             TRIPLE    vs NONE,1.206,1.002,1.451
+masking             SINGLE    vs NONE,1.317,1.038,1.671
+masking             MISSING   vs NONE,0.806,0.257,2.529
+primary_purpose     PREVENTION               vs TREATMENT,0.912,0.748,1.112
+primary_purpose     DIAGNOSTIC               vs TREATMENT,1.478,1.081,2.022
+primary_purpose     SUPPORTIVE_CARE          vs TREATMENT,1.232,0.955,1.589
+primary_purpose     OTHER                    vs TREATMENT,1.074,0.806,1.431
+primary_purpose     BASIC_SCIENCE            vs TREATMENT,1.019,0.717,1.449
+primary_purpose     MISSING                  vs TREATMENT,0.684,0.409,1.144
+primary_purpose     HEALTH_SERVICES_RESEARCH vs TREATMENT,1.123,0.385,3.277
+primary_purpose     SCREENING                vs TREATMENT,1.208,0.350,4.165
+terminated_flag,0.963,0.867,1.068
+n_arms_cap,1.062,1.023,1.102
+n_primary_cap,0.897,0.860,0.936
+log_countries,0.506,0.468,0.547
+has_biological,0.968,0.832,1.127
+area_oncology,0.834,0.723,0.961
+area_cns,0.921,0.811,1.046
+area_cardiovascular,0.957,0.833,1.099
+area_infectious,0.901,0.751,1.080
+area_metabolic,1.167,1.007,1.352
+area_respiratory,0.851,0.733,0.989
+area_immune,0.839,0.748,0.940

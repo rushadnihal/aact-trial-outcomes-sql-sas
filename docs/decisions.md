@@ -61,7 +61,7 @@ The legal deadline is for **submitting** results, not for posting them; posting 
 ## Model specification (SAS)
 - Termination: logistic regression, COMPLETED vs TERMINATED, sponsor-clustered robust SEs (PROC SURVEYLOGISTIC), AUC and Hosmer-Lemeshow from PROC LOGISTIC. Predictors: sponsor class, phase, start period, allocation, intervention model, primary purpose, masking, US site, sex eligibility, arms, primary outcomes, interventions, countries, biological, other intervention type, six therapeutic-area flags. Enrollment excluded. Reference level = most frequent level.
 - Sensitivity: start year <= 2018; withdrawn counted as early stops.
-- Reporting: Kaplan-Meier (cumulative submission) by sponsor class and start period; Cox with robust sponsor-clustered variance; logistic model for late (> 12 months or never) among trials with >= 12 months of follow-up; proportional hazards check by resampling.
+- Reporting: Kaplan-Meier (cumulative submission) by sponsor class and start period; Cox with robust sponsor-clustered variance; logistic model for late (> 12 months or never) among trials with >= 12 months of follow-up; proportional hazards check (resampling first, then a two-window comparison, see results below).
 
 ## SAS data handling (2026-11-16)
 - 12 trials with missing sex eligibility, none terminated, caused quasi-complete separation (odds ratio not estimable); they are treated as `ALL` (no restriction recorded).
@@ -92,3 +92,12 @@ Analysis populations (05_analysis_dataset.sql): termination dataset 44,157 trial
 ## Log
 - 2026-11-16: question confirmed; snapshot restored and row count verified.
 - 2026-11-16: indexes built; cohort defined (46,801 trials); features table built (46,801 rows); windows and quality scripts added.
+- 2026-11-16: SAS models run (termination, reporting). us_site dropped from applicable-subset models (constant). Resampling PH check exhausted SAS OnDemand work space and time, so it was replaced by a two-window Cox comparison (03b).
+
+## Results (2026-11-16)
+- Termination model: n = 44,157, 7,734 terminated; AUC 0.658; Hosmer-Lemeshow p = 0.92. Largest odds ratios: oncology 1.63, start 2020-2022 1.66, sequential design 1.51; lowest: crossover 0.66, no US site 0.53, Phase 3 0.76. Not stable across sensitivity analyses: number of countries (1.09, 1.03, 1.00) and infectious area (0.99, 0.78, 0.97); reported as non-robust.
+- Withdrawn-counted sensitivity: unknown US-site OR rises to 3.16 (withdrawn trials rarely list facilities). One level (DEVICE_FEASIBILITY) is not estimable (OR > 999) because of a single trial.
+- Time to submission (likely applicable, n = 22,668; 19,094 submitted): within 12 months 20% (2008-2011), 33%, 44%, 48% (2020-2022); medians 896, 543, 402, 371 days. By sponsor class at 12 months: NIH 44%, other 36%, industry 34%, FED 28%.
+- Late reporting (n = 22,346 with >= 12 months follow-up; 14,482 late = 64.8%): AUC 0.712; OR 0.24 for 2020-2022, 0.51 per log(1+countries), NIH 0.37, other 0.52, terminated 0.96 (CI 0.87-1.07, null).
+- Proportional hazards violated (resampling p < 0.0001 for sponsor class OTHER; effects differ before and after 365 days: start 2020-2022 HR 2.79 vs 1.99; countries 1.60 vs 1.23; terminated 1.07 vs 0.81). Overall Cox HRs are reported as averages over follow-up; the deadline-aligned logistic model is the primary reporting result.
+- Crude vs adjusted: other sponsors are late in 84% of trials (industry 70%) but have lower adjusted odds of lateness (0.52); explained by start period and country count.

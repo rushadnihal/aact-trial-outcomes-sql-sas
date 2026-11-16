@@ -12,5 +12,5 @@ config.local.*
 .DS_Store
 .Rhistory
 
-# Regenerable exports (public registry data; rebuilt by sql/05)
-output/*.csv
+# Trial-level model inputs are regenerable (rebuilt by sql/05); result tables are kept
+output/model_*.csv

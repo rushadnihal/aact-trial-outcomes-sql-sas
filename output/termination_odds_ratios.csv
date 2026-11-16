@@ -1,0 +1,148 @@
+analysis,Effect,OddsRatioEst,LowerCL,UpperCL
+Main,sponsor_class       OTHER     vs INDUSTRY,1.259,1.141,1.388
+Main,sponsor_class       NIH       vs INDUSTRY,0.937,0.779,1.126
+Main,sponsor_class       OTHER_GOV vs INDUSTRY,0.815,0.580,1.145
+Main,sponsor_class       NETWORK   vs INDUSTRY,0.847,0.495,1.449
+Main,sponsor_class       FED       vs INDUSTRY,1.043,0.743,1.466
+Main,sponsor_class       INDIV     vs INDUSTRY,1.297,0.712,2.362
+Main,phase               PHASE3        vs PHASE2,0.761,0.701,0.826
+Main,phase               PHASE2/PHASE3 vs PHASE2,0.963,0.849,1.093
+Main,start_period        2012-2015 vs 2008-2011,1.011,0.925,1.106
+Main,start_period        2016-2019 vs 2008-2011,1.171,1.058,1.297
+Main,start_period        2020-2022 vs 2008-2011,1.658,1.492,1.843
+Main,allocation          NA             vs RANDOMIZED,0.938,0.780,1.128
+Main,allocation          NON_RANDOMIZED vs RANDOMIZED,0.933,0.818,1.063
+Main,allocation          MISSING        vs RANDOMIZED,0.638,0.351,1.161
+Main,intervention_model  SINGLE_GROUP vs PARALLEL,0.880,0.749,1.033
+Main,intervention_model  CROSSOVER    vs PARALLEL,0.655,0.564,0.760
+Main,intervention_model  SEQUENTIAL   vs PARALLEL,1.512,1.201,1.905
+Main,intervention_model  FACTORIAL    vs PARALLEL,0.939,0.689,1.280
+Main,intervention_model  MISSING      vs PARALLEL,1.507,1.056,2.150
+Main,primary_purpose     PREVENTION               vs TREATMENT,0.697,0.604,0.803
+Main,primary_purpose     DIAGNOSTIC               vs TREATMENT,0.772,0.596,0.998
+Main,primary_purpose     SUPPORTIVE_CARE          vs TREATMENT,0.922,0.747,1.139
+Main,primary_purpose     OTHER                    vs TREATMENT,0.614,0.452,0.834
+Main,primary_purpose     BASIC_SCIENCE            vs TREATMENT,0.965,0.730,1.276
+Main,primary_purpose     MISSING                  vs TREATMENT,0.664,0.396,1.112
+Main,primary_purpose     HEALTH_SERVICES_RESEARCH vs TREATMENT,0.502,0.217,1.163
+Main,primary_purpose     SCREENING                vs TREATMENT,1.000,0.425,2.350
+Main,masking             QUADRUPLE vs NONE,0.816,0.736,0.905
+Main,masking             DOUBLE    vs NONE,0.818,0.730,0.916
+Main,masking             TRIPLE    vs NONE,0.966,0.852,1.097
+Main,masking             SINGLE    vs NONE,0.768,0.658,0.895
+Main,masking             MISSING   vs NONE,0.903,0.447,1.824
+Main,us_site             No      vs Yes,0.526,0.485,0.570
+Main,us_site             Unknown vs Yes,0.667,0.424,1.049
+Main,gender              FEMALE vs ALL,0.872,0.776,0.980
+Main,gender              MALE   vs ALL,0.975,0.843,1.127
+Main,n_arms_cap,0.907,0.871,0.946
+Main,n_primary_cap,0.930,0.902,0.959
+Main,n_interv_cap,0.948,0.917,0.980
+Main,log_countries,1.093,1.027,1.163
+Main,has_biological,0.900,0.808,1.004
+Main,has_other_type,1.093,0.997,1.198
+Main,area_oncology,1.630,1.486,1.787
+Main,area_cns,1.156,1.046,1.278
+Main,area_cardiovascular,1.227,1.105,1.361
+Main,area_infectious,0.991,0.877,1.120
+Main,area_metabolic,0.873,0.771,0.988
+Main,area_respiratory,1.226,1.099,1.367
+Main,area_immune,0.911,0.823,1.007
+Start year <= 2018,sponsor_class       OTHER     vs INDUSTRY,1.291,1.156,1.442
+Start year <= 2018,sponsor_class       NIH       vs INDUSTRY,0.927,0.713,1.207
+Start year <= 2018,sponsor_class       NETWORK   vs INDUSTRY,0.764,0.462,1.263
+Start year <= 2018,sponsor_class       OTHER_GOV vs INDUSTRY,1.085,0.743,1.582
+Start year <= 2018,sponsor_class       FED       vs INDUSTRY,1.062,0.688,1.638
+Start year <= 2018,sponsor_class       INDIV     vs INDUSTRY,1.222,0.634,2.354
+Start year <= 2018,phase               PHASE3        vs PHASE2,0.780,0.711,0.855
+Start year <= 2018,phase               PHASE2/PHASE3 vs PHASE2,0.839,0.714,0.986
+Start year <= 2018,start_period        2012-2015 vs 2008-2011,1.009,0.924,1.103
+Start year <= 2018,start_period        2016-2019 vs 2008-2011,1.098,0.990,1.218
+Start year <= 2018,allocation          NA             vs RANDOMIZED,0.930,0.753,1.149
+Start year <= 2018,allocation          NON_RANDOMIZED vs RANDOMIZED,0.921,0.786,1.079
+Start year <= 2018,allocation          MISSING        vs RANDOMIZED,0.675,0.366,1.246
+Start year <= 2018,intervention_model  SINGLE_GROUP vs PARALLEL,0.888,0.743,1.062
+Start year <= 2018,intervention_model  CROSSOVER    vs PARALLEL,0.634,0.535,0.751
+Start year <= 2018,intervention_model  FACTORIAL    vs PARALLEL,0.904,0.630,1.298
+Start year <= 2018,intervention_model  SEQUENTIAL   vs PARALLEL,1.075,0.759,1.521
+Start year <= 2018,intervention_model  MISSING      vs PARALLEL,1.511,1.055,2.165
+Start year <= 2018,primary_purpose     PREVENTION               vs TREATMENT,0.754,0.638,0.890
+Start year <= 2018,primary_purpose     SUPPORTIVE_CARE          vs TREATMENT,0.959,0.741,1.241
+Start year <= 2018,primary_purpose     DIAGNOSTIC               vs TREATMENT,0.829,0.624,1.099
+Start year <= 2018,primary_purpose     OTHER                    vs TREATMENT,0.624,0.437,0.892
+Start year <= 2018,primary_purpose     BASIC_SCIENCE            vs TREATMENT,0.901,0.646,1.256
+Start year <= 2018,primary_purpose     MISSING                  vs TREATMENT,0.656,0.390,1.102
+Start year <= 2018,primary_purpose     HEALTH_SERVICES_RESEARCH vs TREATMENT,0.541,0.201,1.455
+Start year <= 2018,primary_purpose     SCREENING                vs TREATMENT,0.575,0.181,1.828
+Start year <= 2018,masking             QUADRUPLE vs NONE,0.819,0.723,0.928
+Start year <= 2018,masking             DOUBLE    vs NONE,0.859,0.754,0.978
+Start year <= 2018,masking             TRIPLE    vs NONE,0.967,0.831,1.124
+Start year <= 2018,masking             SINGLE    vs NONE,0.782,0.648,0.944
+Start year <= 2018,masking             MISSING   vs NONE,0.857,0.425,1.729
+Start year <= 2018,us_site             No      vs Yes,0.556,0.507,0.609
+Start year <= 2018,us_site             Unknown vs Yes,0.647,0.408,1.026
+Start year <= 2018,gender              FEMALE vs ALL,0.897,0.786,1.024
+Start year <= 2018,gender              MALE   vs ALL,0.969,0.824,1.140
+Start year <= 2018,n_arms_cap,0.910,0.863,0.961
+Start year <= 2018,n_primary_cap,0.940,0.904,0.976
+Start year <= 2018,n_interv_cap,0.942,0.906,0.979
+Start year <= 2018,log_countries,1.031,0.963,1.105
+Start year <= 2018,has_biological,0.884,0.785,0.997
+Start year <= 2018,has_other_type,1.056,0.948,1.175
+Start year <= 2018,area_oncology,1.600,1.440,1.778
+Start year <= 2018,area_cns,1.211,1.073,1.367
+Start year <= 2018,area_cardiovascular,1.278,1.138,1.434
+Start year <= 2018,area_infectious,0.777,0.654,0.922
+Start year <= 2018,area_metabolic,0.878,0.768,1.004
+Start year <= 2018,area_respiratory,1.081,0.947,1.233
+Start year <= 2018,area_immune,0.872,0.778,0.976
+Withdrawn counted,sponsor_class       OTHER     vs INDUSTRY,1.362,1.237,1.501
+Withdrawn counted,sponsor_class       NIH       vs INDUSTRY,0.975,0.827,1.149
+Withdrawn counted,sponsor_class       OTHER_GOV vs INDUSTRY,0.894,0.663,1.205
+Withdrawn counted,sponsor_class       NETWORK   vs INDUSTRY,1.085,0.651,1.810
+Withdrawn counted,sponsor_class       FED       vs INDUSTRY,1.396,0.748,2.604
+Withdrawn counted,sponsor_class       INDIV     vs INDUSTRY,1.217,0.673,2.202
+Withdrawn counted,phase               PHASE3        vs PHASE2,0.750,0.696,0.809
+Withdrawn counted,phase               PHASE2/PHASE3 vs PHASE2,0.958,0.845,1.087
+Withdrawn counted,start_period        2012-2015 vs 2008-2011,1.074,0.985,1.172
+Withdrawn counted,start_period        2016-2019 vs 2008-2011,1.402,1.278,1.539
+Withdrawn counted,start_period        2020-2022 vs 2008-2011,2.119,1.925,2.332
+Withdrawn counted,allocation          NA             vs RANDOMIZED,0.695,0.591,0.817
+Withdrawn counted,allocation          NON_RANDOMIZED vs RANDOMIZED,0.869,0.768,0.983
+Withdrawn counted,allocation          MISSING        vs RANDOMIZED,0.769,0.501,1.179
+Withdrawn counted,intervention_model  SINGLE_GROUP vs PARALLEL,1.096,0.955,1.257
+Withdrawn counted,intervention_model  CROSSOVER    vs PARALLEL,0.752,0.658,0.859
+Withdrawn counted,intervention_model  SEQUENTIAL   vs PARALLEL,1.467,1.193,1.804
+Withdrawn counted,intervention_model  FACTORIAL    vs PARALLEL,0.999,0.766,1.303
+Withdrawn counted,intervention_model  MISSING      vs PARALLEL,1.624,1.151,2.291
+Withdrawn counted,primary_purpose     PREVENTION               vs TREATMENT,0.708,0.626,0.800
+Withdrawn counted,primary_purpose     DIAGNOSTIC               vs TREATMENT,0.809,0.644,1.017
+Withdrawn counted,primary_purpose     SUPPORTIVE_CARE          vs TREATMENT,0.917,0.758,1.109
+Withdrawn counted,primary_purpose     OTHER                    vs TREATMENT,0.664,0.511,0.863
+Withdrawn counted,primary_purpose     BASIC_SCIENCE            vs TREATMENT,1.003,0.792,1.271
+Withdrawn counted,primary_purpose     MISSING                  vs TREATMENT,0.803,0.539,1.196
+Withdrawn counted,primary_purpose     HEALTH_SERVICES_RESEARCH vs TREATMENT,0.507,0.244,1.050
+Withdrawn counted,primary_purpose     SCREENING                vs TREATMENT,0.719,0.294,1.758
+Withdrawn counted,primary_purpose     DEVICE_FEASIBILITY       vs TREATMENT,>999.999,>999.999,>999.999
+Withdrawn counted,masking             QUADRUPLE vs NONE,0.834,0.758,0.916
+Withdrawn counted,masking             DOUBLE    vs NONE,0.801,0.722,0.887
+Withdrawn counted,masking             TRIPLE    vs NONE,0.944,0.845,1.055
+Withdrawn counted,masking             SINGLE    vs NONE,0.735,0.640,0.844
+Withdrawn counted,masking             MISSING   vs NONE,0.848,0.479,1.501
+Withdrawn counted,us_site             No      vs Yes,0.516,0.478,0.557
+Withdrawn counted,us_site             Unknown vs Yes,3.158,2.527,3.946
+Withdrawn counted,gender              FEMALE vs ALL,0.897,0.803,1.002
+Withdrawn counted,gender              MALE   vs ALL,0.997,0.864,1.150
+Withdrawn counted,n_arms_cap,0.881,0.849,0.915
+Withdrawn counted,n_primary_cap,0.902,0.874,0.931
+Withdrawn counted,n_interv_cap,0.943,0.913,0.975
+Withdrawn counted,log_countries,1.004,0.947,1.063
+Withdrawn counted,has_biological,0.932,0.835,1.042
+Withdrawn counted,has_other_type,1.111,1.020,1.211
+Withdrawn counted,area_oncology,1.601,1.467,1.748
+Withdrawn counted,area_cns,1.149,1.047,1.260
+Withdrawn counted,area_cardiovascular,1.269,1.154,1.395
+Withdrawn counted,area_infectious,0.972,0.864,1.093
+Withdrawn counted,area_metabolic,0.893,0.799,0.997
+Withdrawn counted,area_respiratory,1.270,1.155,1.396
+Withdrawn counted,area_immune,0.969,0.883,1.064
