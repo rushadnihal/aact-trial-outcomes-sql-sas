@@ -18,7 +18,7 @@ A reproducible SQL (PostgreSQL) and SAS analysis of ClinicalTrials.gov registry 
 
 ![Forest plot](output/termination_forest.png)
 
-Odds ratios from logistic regression with sponsor-clustered robust standard errors (3,000+ sponsors; reference level is the most frequent category). Full table: [`output/termination_odds_ratios.csv`](output/termination_odds_ratios.csv). Enrollment is deliberately excluded: AACT stores the actual count, which is a consequence of termination (terminated trials have a median of 24 participants against 100 for completed ones).
+Odds ratios from logistic regression with sponsor-clustered robust standard errors (thousands of sponsors; reference level is the most frequent category). Full table: [`output/termination_odds_ratios.csv`](output/termination_odds_ratios.csv). Enrollment is deliberately excluded: AACT stores the actual count, which is a consequence of termination (terminated trials have a median of 24 participants against 100 for completed ones).
 
 Sensitivity analyses (same CSV):
 - **Start year <= 2018** (guards against recent trials being resolved selectively): oncology (1.60), crossover (0.63), Phase 3 (0.78) and no US site (0.56) are stable.
@@ -56,7 +56,7 @@ The Cox model (sponsor-clustered robust variance) and the late-reporting logisti
 | Other sponsor vs industry | 1.70 | 2.24 |
 | Terminated vs completed | 1.07 | 0.81 |
 
-Overall hazard ratios are therefore averages over follow-up. The deadline-aligned late-reporting model is not affected by this, which is why it is the main reporting result. Full table: [`output/cox_hr_by_window.csv`](output/cox_hr_by_window.csv). In the unadjusted data, "other" sponsors look worse than industry (84% late vs 70%), but after adjustment for start period and country count they are less likely to be late (OR 0.52): the crude and adjusted pictures differ.
+Overall hazard ratios are therefore averages over follow-up. The deadline-aligned late-reporting model is not affected by this, which is why it is the main reporting result. Full table: [`output/cox_hr_by_window.csv`](output/cox_hr_by_window.csv). Among all trials with at least 12 months of follow-up, "other" sponsors look worse than industry (84% late vs 70%), but after adjustment for start period and country count they are less likely to be late (OR 0.52): the crude and adjusted pictures differ.
 
 ## Cohort
 
