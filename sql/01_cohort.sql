@@ -6,7 +6,7 @@
 -- Inputs  : ctgov.studies, ctgov.interventions, ctgov.sponsors
 -- Outputs : Flow table (printed); view analysis.cohort_base
 -- Snapshot: AACT 2026-11-15
--- Run     : psql -U postgres -h localhost -d aact -f sql/01_cohort.sql > logs/01.log
+-- Run     : (after 00b_indexes.sql) psql -U postgres -h localhost -d aact -f sql/01_cohort.sql > logs/01.log
 -- Config  : edit the \set lines below; nothing else is hard-coded.
 -- =====================================================================
 
@@ -36,10 +36,12 @@ SELECT s.nct_id,
        s.enrollment,
        s.enrollment_type,
        s.is_fda_regulated_drug,
-       EXISTS (SELECT 1 FROM ctgov.interventions i
-               WHERE i.nct_id = s.nct_id
-                 AND i.intervention_type IN ('DRUG', 'BIOLOGICAL')) AS has_drug_or_bio
-FROM ctgov.studies s;
+       COALESCE(d.has_drug_or_bio, FALSE) AS has_drug_or_bio
+FROM ctgov.studies s
+LEFT JOIN (SELECT DISTINCT nct_id, TRUE AS has_drug_or_bio
+           FROM ctgov.interventions
+           WHERE intervention_type IN ('DRUG', 'BIOLOGICAL')) d
+       ON d.nct_id = s.nct_id;
 
 -- ---------------------------------------------------------------------
 -- Cohort flow table (cumulative; each row applies one more rule)
