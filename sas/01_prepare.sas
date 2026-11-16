@@ -42,6 +42,10 @@ libname outdir clear;
     end;
     drop i;
 
+    /* 12 trials have missing sex eligibility and none was terminated (quasi-complete
+       separation, odds ratio not estimable); treated as 'ALL' (no sex restriction recorded) */
+    if gender = 'MISSING' then gender = 'ALL';
+
     if      has_us_facility = 1 then us_site = 'Yes';
     else if has_us_facility = 0 then us_site = 'No';
     else                             us_site = 'Unknown';

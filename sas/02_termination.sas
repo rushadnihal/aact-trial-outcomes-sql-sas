@@ -48,14 +48,15 @@ run;
 
 /* ---- discrimination and calibration of the main model (naive SEs) ---- */
 ods graphics / imagename="termination_roc";
-proc logistic data=aact.term plots(only)=roc;
+proc logistic data=aact.term plots(only maxpoints=none)=roc;
   class &classvars. / param=ref ref=first order=freq;
   model terminated_flag(event='1') = &classvars. &numvars. / lackfit rsquare;
 run;
 
 /* ---- forest plot of the main model ---- */
 ods graphics / imagename="termination_forest";
-proc sgplot data=work.or_main noautolegend;
+/* levels labelled MISSING are tiny and have very wide intervals; they are left off the plot (kept in the table) */
+proc sgplot data=work.or_main(where=(index(Effect,'MISSING')=0)) noautolegend;
   scatter y=Effect x=OddsRatioEst / xerrorlower=LowerCL xerrorupper=UpperCL
           markerattrs=(symbol=circlefilled size=7);
   refline 1 / axis=x;

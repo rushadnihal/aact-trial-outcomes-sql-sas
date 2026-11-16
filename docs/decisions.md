@@ -63,6 +63,10 @@ The legal deadline is for **submitting** results, not for posting them; posting 
 - Sensitivity: start year <= 2018; withdrawn counted as early stops.
 - Reporting: Kaplan-Meier (cumulative submission) by sponsor class and start period; Cox with robust sponsor-clustered variance; logistic model for late (> 12 months or never) among trials with >= 12 months of follow-up; proportional hazards check by resampling.
 
+## SAS data handling (2026-11-16)
+- 12 trials with missing sex eligibility, none terminated, caused quasi-complete separation (odds ratio not estimable); they are treated as `ALL` (no restriction recorded).
+- Other missing categories are kept as their own level, shown in the tables and left off the forest plot.
+
 ## Findings that shape the modelling
 - **Enrollment is not a valid predictor of termination.** AACT keeps one enrollment value, which becomes the actual count at completion; terminated trials have a median of 24 against 100 for completed ones. That is a consequence of the outcome, so it is described but left out of the termination model (reverse causation / leakage). Planned enrollment is not available in this snapshot.
 - **Rising termination share by start year (about 15% for 2008-2016 to 21-23% for 2019-2022) is partly a selection effect.** Only resolved trials are kept; for recent starts, short trials and early terminations resolve first. Plan: sensitivity analysis restricted to earlier start years (for example 2008-2018) and a time-to-termination model.
