@@ -1,0 +1,13 @@
+# Raw AACT data and dumps never go in git
+*.dmp
+*.zip
+*.pipe
+*.txt.gz
+20*_clinical_trials_ctgov/
+restore.log
+# Local config / secrets
+.env
+config.local.*
+# OS / editor
+.DS_Store
+.Rhistory
