@@ -1,0 +1,41 @@
+=== 1. Duplicates ===
+                  check_name                   | n 
+-----------------------------------------------+---
+ studies: rows minus distinct nct_id           | 0
+ features: rows minus distinct nct_id          | 0
+ cohort trials with more than one lead sponsor | 0
+ cohort trials with no lead sponsor            | 0
+(4 rows)
+
+psql:sql/04_quality_checks.sql:39: NOTICE:  view "quality_flags" does not exist, skipping
+DROP VIEW
+CREATE VIEW
+
+=== 2. Records affected by each flag (cohort = all trials in analysis.features) ===
+                          rule                           | n_affected | pct_of_cohort 
+---------------------------------------------------------+------------+---------------
+ TERMINATED without why_stopped                          |        639 |          1.37
+ results submitted before primary completion             |        149 |          0.32
+ COMPLETED or TERMINATED with missing primary completion |         33 |          0.07
+ unknown or missing sponsor class                        |          8 |          0.02
+ primary completion before start date                    |          8 |          0.02
+ COMPLETED with enrollment 0                             |          2 |          0.00
+ COMPLETED with a why_stopped value                      |          0 |          0.00
+ COMPLETED but primary completion after snapshot         |          0 |          0.00
+(8 rows)
+
+
+=== 3. Trials hit by at least one date flag (what the date rules would remove from timing analyses) ===
+ n_any_date_flag 
+-----------------
+             190
+(1 row)
+
+
+=== 4. Cross-check against AACT months_to_report_results (trials with results) ===
+If AACT measures completion to SUBMISSION, the submission-based difference should be near 0 and the posting-based one larger.
+ n_compared | mean_abs_diff_months_submission | mean_abs_diff_months_posting | n_diff_gt_2_months_submission 
+------------+---------------------------------+------------------------------+-------------------------------
+      25177 |                            0.34 |                         4.46 |                            16
+(1 row)
+

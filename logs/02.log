@@ -1,0 +1,125 @@
+DROP TABLE
+SELECT 46801
+CREATE INDEX
+ANALYZE
+=== Row check: features should equal cohort rows, one per trial ===
+ cohort_rows | feature_rows | distinct_trials 
+-------------+--------------+-----------------
+       46801 |        46801 |           46801
+(1 row)
+
+
+=== Missingness of every feature column (percent null) ===
+         column_name          | pct_null 
+------------------------------+----------
+ is_fda_regulated_drug        |     54.6
+ days_to_results              |     46.2
+ days_to_submission           |     46.2
+ months_to_report_results     |     46.2
+ results_first_posted_date    |     46.2
+ results_first_submitted_date |     46.2
+ has_single_facility          |      5.7
+ has_us_facility              |      5.7
+ terminated_flag              |      5.6
+ minimum_age_num              |      2.4
+ minimum_age_unit             |      2.4
+ primary_purpose              |      0.5
+ allocation                   |      0.3
+ intervention_model           |      0.3
+ masking                      |      0.2
+ enrollment                   |      0.1
+ enrollment_type              |      0.1
+ healthy_volunteers           |      0.1
+ n_primary_outcomes           |      0.1
+ primary_completion_date      |      0.1
+ area_cardiovascular          |      0.0
+ area_cns                     |      0.0
+ area_immune                  |      0.0
+ area_infectious              |      0.0
+ area_metabolic               |      0.0
+ area_oncology                |      0.0
+ area_respiratory             |      0.0
+ gender                       |      0.0
+ has_biological               |      0.0
+ has_other_type               |      0.0
+ n_arms                       |      0.0
+ n_countries                  |      0.0
+ n_interventions              |      0.0
+ nct_id                       |      0.0
+ number_of_facilities         |      0.0
+ overall_status               |      0.0
+ phase                        |      0.0
+ results_posted_flag          |      0.0
+ results_submitted_flag       |      0.0
+ sponsor_class                |      0.0
+ sponsor_name                 |      0.0
+ start_date                   |      0.0
+ start_year                   |      0.0
+ were_results_reported        |      0.0
+ withdrawn_flag               |      0.0
+(45 rows)
+
+
+=== Termination rate by sponsor class (COMPLETED vs TERMINATED only) ===
+ sponsor_class |   n   | n_terminated | pct_terminated 
+---------------+-------+--------------+----------------
+ INDUSTRY      | 23636 |         3725 |           15.8
+ OTHER         | 18391 |         3661 |           19.9
+ NIH           |   850 |          174 |           20.5
+ OTHER_GOV     |   566 |           54 |            9.5
+ NETWORK       |   474 |           74 |           15.6
+ FED           |   182 |           33 |           18.1
+ INDIV         |    58 |           13 |           22.4
+ UNKNOWN       |     8 |            0 |            0.0
+(8 rows)
+
+
+=== Termination rate by phase ===
+     phase     |   n   | pct_terminated 
+---------------+-------+----------------
+ PHASE2        | 25073 |           20.1
+ PHASE2/PHASE3 |  2491 |           16.6
+ PHASE3        | 16601 |           13.7
+(3 rows)
+
+
+=== Termination rate by start year ===
+ start_year |  n   | pct_terminated 
+------------+------+----------------
+       2008 | 3392 |           16.4
+       2009 | 3242 |           15.7
+       2010 | 3115 |           15.9
+       2011 | 3149 |           14.9
+       2012 | 3077 |           15.5
+       2013 | 3038 |           15.7
+       2014 | 3015 |           15.3
+       2015 | 3136 |           16.1
+       2016 | 2931 |           14.7
+       2017 | 2984 |           17.1
+       2018 | 2879 |           19.9
+       2019 | 2631 |           21.0
+       2020 | 2860 |           22.7
+       2021 | 2666 |           23.2
+       2022 | 2050 |           21.8
+(15 rows)
+
+
+=== Termination rate by therapeutic area flags ===
+      area      |   n   | pct_terminated 
+----------------+-------+----------------
+ cardiovascular |  3526 |           19.3
+ metabolic      |  4930 |           15.2
+ cns            |  7094 |           18.2
+ oncology       | 10963 |           25.5
+ infectious     |  5457 |           14.4
+(5 rows)
+
+
+=== Enrollment summary by outcome ===
+ overall_status |   n   | enrollment_q1_med_q3 
+----------------+-------+----------------------
+ COMPLETED      | 36409 | {40,100,268}
+ TERMINATED     |  7730 | {8,24,87.75}
+ WITHDRAWN      |  2636 | {0,0,0}
+(3 rows)
+

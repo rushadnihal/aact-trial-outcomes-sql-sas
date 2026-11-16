@@ -1,0 +1,371 @@
+=== 1. Tables restored in ctgov, with exact row counts ===
+      table_name      | row_count 
+----------------------+-----------
+ browse_conditions    |   4429716
+ browse_interventions |   2578978
+ calculated_values    |    611764
+ conditions           |   1102470
+ countries            |    827485
+ design_groups        |   1126933
+ designs              |    606958
+ eligibilities        |    610773
+ id_information       |    808976
+ interventions        |   1035096
+ keywords             |   1658452
+ responsible_parties  |    593336
+ sponsors             |    974504
+ studies              |    611764
+(14 rows)
+
+
+=== 2. Columns of every restored table ===
+      table_name      | ordinal_position |               column_name               |          data_type          
+----------------------+------------------+-----------------------------------------+-----------------------------
+ browse_conditions    |                1 | id                                      | integer
+ browse_conditions    |                2 | nct_id                                  | character varying
+ browse_conditions    |                3 | mesh_term                               | character varying
+ browse_conditions    |                4 | downcase_mesh_term                      | character varying
+ browse_conditions    |                5 | mesh_type                               | character varying
+ browse_interventions |                1 | id                                      | integer
+ browse_interventions |                2 | nct_id                                  | character varying
+ browse_interventions |                3 | mesh_term                               | character varying
+ browse_interventions |                4 | downcase_mesh_term                      | character varying
+ browse_interventions |                5 | mesh_type                               | character varying
+ calculated_values    |                1 | id                                      | integer
+ calculated_values    |                2 | nct_id                                  | character varying
+ calculated_values    |                3 | number_of_facilities                    | integer
+ calculated_values    |                4 | number_of_nsae_subjects                 | integer
+ calculated_values    |                5 | number_of_sae_subjects                  | integer
+ calculated_values    |                6 | registered_in_calendar_year             | integer
+ calculated_values    |                7 | nlm_download_date                       | date
+ calculated_values    |                8 | actual_duration                         | integer
+ calculated_values    |                9 | were_results_reported                   | boolean
+ calculated_values    |               10 | months_to_report_results                | integer
+ calculated_values    |               11 | has_us_facility                         | boolean
+ calculated_values    |               12 | has_single_facility                     | boolean
+ calculated_values    |               13 | minimum_age_num                         | integer
+ calculated_values    |               14 | maximum_age_num                         | integer
+ calculated_values    |               15 | minimum_age_unit                        | character varying
+ calculated_values    |               16 | maximum_age_unit                        | character varying
+ calculated_values    |               17 | number_of_primary_outcomes_to_measure   | integer
+ calculated_values    |               18 | number_of_secondary_outcomes_to_measure | integer
+ calculated_values    |               19 | number_of_other_outcomes_to_measure     | integer
+ conditions           |                1 | id                                      | integer
+ conditions           |                2 | nct_id                                  | character varying
+ conditions           |                3 | name                                    | character varying
+ conditions           |                4 | downcase_name                           | character varying
+ countries            |                1 | id                                      | integer
+ countries            |                2 | nct_id                                  | character varying
+ countries            |                3 | name                                    | character varying
+ countries            |                4 | removed                                 | boolean
+ design_groups        |                1 | id                                      | integer
+ design_groups        |                2 | nct_id                                  | character varying
+ design_groups        |                3 | group_type                              | character varying
+ design_groups        |                4 | title                                   | character varying
+ design_groups        |                5 | description                             | text
+ designs              |                1 | id                                      | integer
+ designs              |                2 | nct_id                                  | character varying
+ designs              |                3 | allocation                              | character varying
+ designs              |                4 | intervention_model                      | character varying
+ designs              |                5 | observational_model                     | character varying
+ designs              |                6 | primary_purpose                         | character varying
+ designs              |                7 | time_perspective                        | character varying
+ designs              |                8 | masking                                 | character varying
+ designs              |                9 | masking_description                     | text
+ designs              |               10 | intervention_model_description          | text
+ designs              |               11 | subject_masked                          | boolean
+ designs              |               12 | caregiver_masked                        | boolean
+ designs              |               13 | investigator_masked                     | boolean
+ designs              |               14 | outcomes_assessor_masked                | boolean
+ eligibilities        |                1 | id                                      | integer
+ eligibilities        |                2 | nct_id                                  | character varying
+ eligibilities        |                3 | sampling_method                         | character varying
+ eligibilities        |                4 | gender                                  | character varying
+ eligibilities        |                5 | minimum_age                             | character varying
+ eligibilities        |                6 | maximum_age                             | character varying
+ eligibilities        |                7 | healthy_volunteers                      | boolean
+ eligibilities        |                8 | population                              | text
+ eligibilities        |                9 | criteria                                | text
+ eligibilities        |               10 | gender_description                      | text
+ eligibilities        |               11 | gender_based                            | boolean
+ eligibilities        |               12 | adult                                   | boolean
+ eligibilities        |               13 | child                                   | boolean
+ eligibilities        |               14 | older_adult                             | boolean
+ id_information       |                1 | id                                      | integer
+ id_information       |                2 | nct_id                                  | character varying
+ id_information       |                3 | id_source                               | character varying
+ id_information       |                4 | id_value                                | character varying
+ id_information       |                5 | id_type                                 | character varying
+ id_information       |                6 | id_type_description                     | character varying
+ id_information       |                7 | id_link                                 | character varying
+ interventions        |                1 | id                                      | integer
+ interventions        |                2 | nct_id                                  | character varying
+ interventions        |                3 | intervention_type                       | character varying
+ interventions        |                4 | name                                    | character varying
+ interventions        |                5 | description                             | text
+ keywords             |                1 | id                                      | integer
+ keywords             |                2 | nct_id                                  | character varying
+ keywords             |                3 | name                                    | character varying
+ keywords             |                4 | downcase_name                           | character varying
+ responsible_parties  |                1 | id                                      | integer
+ responsible_parties  |                2 | nct_id                                  | character varying
+ responsible_parties  |                3 | responsible_party_type                  | character varying
+ responsible_parties  |                4 | name                                    | character varying
+ responsible_parties  |                5 | title                                   | character varying
+ responsible_parties  |                6 | organization                            | character varying
+ responsible_parties  |                7 | affiliation                             | text
+ responsible_parties  |                8 | old_name_title                          | character varying
+ sponsors             |                1 | id                                      | integer
+ sponsors             |                2 | nct_id                                  | character varying
+ sponsors             |                3 | agency_class                            | character varying
+ sponsors             |                4 | lead_or_collaborator                    | character varying
+ sponsors             |                5 | name                                    | character varying
+ studies              |                1 | nct_id                                  | character varying
+ studies              |                2 | nlm_download_date_description           | character varying
+ studies              |                3 | study_first_submitted_date              | date
+ studies              |                4 | results_first_submitted_date            | date
+ studies              |                5 | disposition_first_submitted_date        | date
+ studies              |                6 | last_update_submitted_date              | date
+ studies              |                7 | study_first_submitted_qc_date           | date
+ studies              |                8 | study_first_posted_date                 | date
+ studies              |                9 | study_first_posted_date_type            | character varying
+ studies              |               10 | results_first_submitted_qc_date         | date
+ studies              |               11 | results_first_posted_date               | date
+ studies              |               12 | results_first_posted_date_type          | character varying
+ studies              |               13 | disposition_first_submitted_qc_date     | date
+ studies              |               14 | disposition_first_posted_date           | date
+ studies              |               15 | disposition_first_posted_date_type      | character varying
+ studies              |               16 | last_update_submitted_qc_date           | date
+ studies              |               17 | last_update_posted_date                 | date
+ studies              |               18 | last_update_posted_date_type            | character varying
+ studies              |               19 | start_month_year                        | character varying
+ studies              |               20 | start_date_type                         | character varying
+ studies              |               21 | start_date                              | date
+ studies              |               22 | verification_month_year                 | character varying
+ studies              |               23 | verification_date                       | date
+ studies              |               24 | completion_month_year                   | character varying
+ studies              |               25 | completion_date_type                    | character varying
+ studies              |               26 | completion_date                         | date
+ studies              |               27 | primary_completion_month_year           | character varying
+ studies              |               28 | primary_completion_date_type            | character varying
+ studies              |               29 | primary_completion_date                 | date
+ studies              |               30 | target_duration                         | character varying
+ studies              |               31 | study_type                              | character varying
+ studies              |               32 | acronym                                 | character varying
+ studies              |               33 | baseline_population                     | text
+ studies              |               34 | brief_title                             | text
+ studies              |               35 | official_title                          | text
+ studies              |               36 | overall_status                          | character varying
+ studies              |               37 | last_known_status                       | character varying
+ studies              |               38 | phase                                   | character varying
+ studies              |               39 | enrollment                              | integer
+ studies              |               40 | enrollment_type                         | character varying
+ studies              |               41 | source                                  | character varying
+ studies              |               42 | limitations_and_caveats                 | character varying
+ studies              |               43 | number_of_arms                          | integer
+ studies              |               44 | number_of_groups                        | integer
+ studies              |               45 | why_stopped                             | character varying
+ studies              |               46 | has_expanded_access                     | boolean
+ studies              |               47 | expanded_access_type_individual         | boolean
+ studies              |               48 | expanded_access_type_intermediate       | boolean
+ studies              |               49 | expanded_access_type_treatment          | boolean
+ studies              |               50 | has_dmc                                 | boolean
+ studies              |               51 | is_fda_regulated_drug                   | boolean
+ studies              |               52 | is_fda_regulated_device                 | boolean
+ studies              |               53 | is_unapproved_device                    | boolean
+ studies              |               54 | is_ppsd                                 | boolean
+ studies              |               55 | is_us_export                            | boolean
+ studies              |               56 | biospec_retention                       | character varying
+ studies              |               57 | biospec_description                     | text
+ studies              |               58 | ipd_time_frame                          | character varying
+ studies              |               59 | ipd_access_criteria                     | character varying
+ studies              |               60 | ipd_url                                 | character varying
+ studies              |               61 | plan_to_share_ipd                       | character varying
+ studies              |               62 | plan_to_share_ipd_description           | character varying
+ studies              |               63 | created_at                              | timestamp without time zone
+ studies              |               64 | updated_at                              | timestamp without time zone
+ studies              |               65 | source_class                            | character varying
+ studies              |               66 | delayed_posting                         | boolean
+ studies              |               67 | expanded_access_nctid                   | character varying
+ studies              |               68 | expanded_access_status_for_nctid        | character varying
+ studies              |               69 | fdaaa801_violation                      | boolean
+ studies              |               70 | baseline_type_units_analyzed            | character varying
+ studies              |               71 | patient_registry                        | boolean
+(170 rows)
+
+
+=== 3. Missingness: every column of ctgov.studies ===
+             column_name             | n_null | n_rows | pct_null 
+-------------------------------------+--------+--------+----------
+ expanded_access_type_intermediate   | 611535 | 611764 |    100.0
+ expanded_access_type_treatment      | 611546 | 611764 |    100.0
+ fdaaa801_violation                  | 611753 | 611764 |    100.0
+ is_ppsd                             | 611740 | 611764 |    100.0
+ nlm_download_date_description       | 611764 | 611764 |    100.0
+ baseline_type_units_analyzed        | 611188 | 611764 |     99.9
+ expanded_access_nctid               | 610855 | 611764 |     99.9
+ expanded_access_status_for_nctid    | 610856 | 611764 |     99.9
+ expanded_access_type_individual     | 611453 | 611764 |     99.9
+ delayed_posting                     | 610773 | 611764 |     99.8
+ is_unapproved_device                | 606325 | 611764 |     99.1
+ disposition_first_submitted_qc_date | 603669 | 611764 |     98.7
+ disposition_first_posted_date       | 601914 | 611764 |     98.4
+ disposition_first_posted_date_type  | 601914 | 611764 |     98.4
+ disposition_first_submitted_date    | 601871 | 611764 |     98.4
+ ipd_url                             | 598058 | 611764 |     97.8
+ limitations_and_caveats             | 594635 | 611764 |     97.2
+ target_duration                     | 593586 | 611764 |     97.0
+ baseline_population                 | 584483 | 611764 |     95.5
+ biospec_description                 | 583503 | 611764 |     95.4
+ biospec_retention                   | 583602 | 611764 |     95.4
+ ipd_access_criteria                 | 580224 | 611764 |     94.8
+ ipd_time_frame                      | 577410 | 611764 |     94.4
+ why_stopped                         | 564097 | 611764 |     92.2
+ is_us_export                        | 537478 | 611764 |     87.9
+ results_first_posted_date           | 530738 | 611764 |     86.8
+ results_first_posted_date_type      | 530738 | 611764 |     86.8
+ results_first_submitted_date        | 530738 | 611764 |     86.8
+ results_first_submitted_qc_date     | 530738 | 611764 |     86.8
+ plan_to_share_ipd_description       | 517685 | 611764 |     84.6
+ number_of_groups                    | 516995 | 611764 |     84.5
+ last_known_status                   | 513048 | 611764 |     83.9
+ patient_registry                    | 493788 | 611764 |     80.7
+ acronym                             | 432854 | 611764 |     70.8
+ plan_to_share_ipd                   | 285902 | 611764 |     46.7
+ is_fda_regulated_device             | 223987 | 611764 |     36.6
+ is_fda_regulated_drug               | 223884 | 611764 |     36.6
+ start_date_type                     | 186121 | 611764 |     30.4
+ number_of_arms                      | 168857 | 611764 |     27.6
+ phase                               | 145038 | 611764 |     23.7
+ has_dmc                             | 108456 | 611764 |     17.7
+ completion_date_type                |  23427 | 611764 |      3.8
+ primary_completion_date             |  21890 | 611764 |      3.6
+ primary_completion_date_type        |  21953 | 611764 |      3.6
+ primary_completion_month_year       |  21890 | 611764 |      3.6
+ enrollment_type                     |  17147 | 611764 |      2.8
+ completion_date                     |  16695 | 611764 |      2.7
+ completion_month_year               |  16695 | 611764 |      2.7
+ official_title                      |   9983 | 611764 |      1.6
+ enrollment                          |   7149 | 611764 |      1.2
+ has_expanded_access                 |   7451 | 611764 |      1.2
+ start_date                          |   5381 | 611764 |      0.9
+ start_month_year                    |   5381 | 611764 |      0.9
+ source_class                        |    991 | 611764 |      0.2
+ study_type                          |    991 | 611764 |      0.2
+ verification_date                   |    991 | 611764 |      0.2
+ verification_month_year             |    991 | 611764 |      0.2
+ brief_title                         |      0 | 611764 |      0.0
+ created_at                          |      0 | 611764 |      0.0
+ last_update_posted_date             |      0 | 611764 |      0.0
+ last_update_posted_date_type        |      0 | 611764 |      0.0
+ last_update_submitted_date          |      0 | 611764 |      0.0
+ last_update_submitted_qc_date       |      0 | 611764 |      0.0
+ nct_id                              |      0 | 611764 |      0.0
+ overall_status                      |      0 | 611764 |      0.0
+ source                              |      0 | 611764 |      0.0
+ study_first_posted_date             |      0 | 611764 |      0.0
+ study_first_posted_date_type        |      0 | 611764 |      0.0
+ study_first_submitted_date          |      0 | 611764 |      0.0
+ study_first_submitted_qc_date       |      0 | 611764 |      0.0
+ updated_at                          |      0 | 611764 |      0.0
+(71 rows)
+
+
+=== 4. Key distributions on ctgov.studies ===
+--- study_type ---
+   study_type    |   n    
+-----------------+--------
+ INTERVENTIONAL  | 466855
+ OBSERVATIONAL   | 142842
+ EXPANDED_ACCESS |   1076
+                 |    991
+(4 rows)
+
+--- overall_status (interventional only) ---
+     overall_status      |   n    
+-------------------------+--------
+ COMPLETED               | 262185
+ UNKNOWN                 |  68164
+ RECRUITING              |  47436
+ TERMINATED              |  30145
+ NOT_YET_RECRUITING      |  22801
+ ACTIVE_NOT_RECRUITING   |  17259
+ WITHDRAWN               |  14002
+ ENROLLING_BY_INVITATION |   3431
+ SUSPENDED               |   1432
+(9 rows)
+
+--- phase (interventional only) ---
+     phase     |   n    
+---------------+--------
+ NA            | 241386
+ PHASE2        |  66153
+ PHASE1        |  49096
+ PHASE3        |  42568
+ PHASE4        |  36112
+ PHASE1/PHASE2 |  17205
+ PHASE2/PHASE3 |   7663
+ EARLY_PHASE1  |   6543
+               |    129
+(9 rows)
+
+--- start_date range and completeness ---
+ min_start  | max_start  | n_missing_start 
+------------+------------+-----------------
+ 1900-01-31 | 2099-01-01 |            5381
+(1 row)
+
+--- results posting (interventional) ---
+ n_results_posted | n_submitted_not_posted | n_interventional 
+------------------+------------------------+------------------
+            76284 |                      0 |           466855
+(1 row)
+
+--- why_stopped populated by status ---
+ overall_status |   n   | n_with_reason 
+----------------+-------+---------------
+ TERMINATED     | 34733 |         31180
+ WITHDRAWN      | 17000 |         14888
+ SUSPENDED      |  1756 |          1599
+(3 rows)
+
+
+=== 5. Primary keys / duplicates sanity ===
+ n_rows | n_distinct_nct_id 
+--------+-------------------
+ 611764 |            611764
+(1 row)
+
+
+=== 6. Intervention types (drug-trial definition) ===
+  intervention_type  | n_interventions | n_studies 
+---------------------+-----------------+-----------
+ DRUG                |          419189 |    214453
+ OTHER               |          183965 |    125864
+ DEVICE              |          106262 |     77167
+ BEHAVIORAL          |          101433 |     66062
+ PROCEDURE           |           94868 |     61297
+ BIOLOGICAL          |           47870 |     30249
+ DIAGNOSTIC_TEST     |           27857 |     19851
+ DIETARY_SUPPLEMENT  |           31551 |     18499
+ RADIATION           |           13210 |     10827
+ COMBINATION_PRODUCT |            4797 |      3487
+ GENETIC             |            4094 |      2896
+(11 rows)
+
+
+=== 7. Sponsor classes (lead sponsors) ===
+ agency_class | n_studies 
+--------------+-----------
+ OTHER        |    438412
+ INDUSTRY     |    133711
+ OTHER_GOV    |     16376
+ NIH          |     11593
+ NETWORK      |      5069
+ FED          |      4959
+              |       991
+ INDIV        |       561
+ UNKNOWN      |        89
+ AMBIG        |         3
+(10 rows)
+

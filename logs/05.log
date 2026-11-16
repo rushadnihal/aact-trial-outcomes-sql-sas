@@ -1,0 +1,51 @@
+psql:sql/05_analysis_dataset.sql:23: NOTICE:  view "term_base" does not exist, skipping
+DROP VIEW
+psql:sql/05_analysis_dataset.sql:24: NOTICE:  view "model_reporting" does not exist, skipping
+DROP VIEW
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+=== Analysis population flow ===
+ step |                         description                          |   n   
+------+--------------------------------------------------------------+-------
+    1 | Cohort (completed, terminated, withdrawn)                    | 46801
+    2 | less WITHDRAWN (sensitivity analysis only)                   |  2636
+    3 | Termination model dataset (after unknown-sponsor-class rule) | 44157
+    4 |    of which terminated                                       |  7734
+    5 | Reporting dataset (after date and sponsor rules)             | 43975
+    6 |    with results submitted by the snapshot (events)           | 25024
+    7 |    with >= 12 months follow-up (late_12m defined)            | 43510
+    8 |    late_12m = 1                                              | 33066
+(8 rows)
+
+
+=== Missing values in model_termination (count of NULLs per column) ===
+    column_name     | n_null 
+--------------------+--------
+ has_us_facility    |   1628
+ min_age_years      |   1058
+ primary_purpose    |    206
+ intervention_model |    130
+ allocation         |    109
+ masking            |     87
+ n_primary_outcomes |     28
+ healthy_volunteers |     25
+ gender             |     12
+(9 rows)
+
+
+=== Minimum age units seen (check that min_age_years is now populated) ===
+ minimum_age_unit |   n   | n_min_age_years 
+------------------+-------+-----------------
+ year             | 41782 |           41782
+                  |  1058 |               0
+ month            |   864 |             864
+ day              |   246 |             246
+ week             |   162 |             162
+ hour             |    37 |              37
+ minute           |     8 |               8
+(7 rows)
+
+COPY 44157
+COPY 46793
+COPY 43975

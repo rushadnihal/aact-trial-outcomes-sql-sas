@@ -1,0 +1,71 @@
+=== Indexes present before ===
+      tablename       |            indexname            
+----------------------+---------------------------------
+ browse_conditions    | idx_browse_conditions_nct_id
+ browse_interventions | idx_browse_interventions_nct_id
+ calculated_values    | idx_calculated_values_nct_id
+ conditions           | idx_conditions_nct_id
+ countries            | idx_countries_nct_id
+ design_groups        | idx_design_groups_nct_id
+ designs              | idx_designs_nct_id
+ eligibilities        | idx_eligibilities_nct_id
+ id_information       | idx_id_information_nct_id
+ interventions        | idx_interventions_nct_id
+ interventions        | idx_interventions_type
+ keywords             | idx_keywords_nct_id
+ responsible_parties  | idx_responsible_parties_nct_id
+ sponsors             | idx_sponsors_nct_id
+ studies              | ux_studies_nct_id
+(15 rows)
+
+psql:sql/00b_indexes.sql:15: NOTICE:  relation "ux_studies_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:16: NOTICE:  relation "idx_interventions_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:17: NOTICE:  relation "idx_interventions_type" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:18: NOTICE:  relation "idx_sponsors_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:19: NOTICE:  relation "idx_designs_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:20: NOTICE:  relation "idx_conditions_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:21: NOTICE:  relation "idx_browse_conditions_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:22: NOTICE:  relation "idx_browse_interventions_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:23: NOTICE:  relation "idx_design_groups_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:24: NOTICE:  relation "idx_calculated_values_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:25: NOTICE:  relation "idx_countries_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:26: NOTICE:  relation "idx_eligibilities_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:27: NOTICE:  relation "idx_id_information_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:28: NOTICE:  relation "idx_responsible_parties_nct_id" already exists, skipping
+CREATE INDEX
+psql:sql/00b_indexes.sql:29: NOTICE:  relation "idx_keywords_nct_id" already exists, skipping
+CREATE INDEX
+ANALYZE
+=== Indexes present after ===
+      tablename       |            indexname            
+----------------------+---------------------------------
+ browse_conditions    | idx_browse_conditions_nct_id
+ browse_interventions | idx_browse_interventions_nct_id
+ calculated_values    | idx_calculated_values_nct_id
+ conditions           | idx_conditions_nct_id
+ countries            | idx_countries_nct_id
+ design_groups        | idx_design_groups_nct_id
+ designs              | idx_designs_nct_id
+ eligibilities        | idx_eligibilities_nct_id
+ id_information       | idx_id_information_nct_id
+ interventions        | idx_interventions_nct_id
+ interventions        | idx_interventions_type
+ keywords             | idx_keywords_nct_id
+ responsible_parties  | idx_responsible_parties_nct_id
+ sponsors             | idx_sponsors_nct_id
+ studies              | ux_studies_nct_id
+(15 rows)
+

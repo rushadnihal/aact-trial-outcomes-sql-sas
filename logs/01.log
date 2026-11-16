@@ -1,0 +1,95 @@
+psql:sql/01_cohort.sql:17: NOTICE:  schema "analysis" already exists, skipping
+CREATE SCHEMA
+psql:sql/01_cohort.sql:22: NOTICE:  drop cascades to 4 other objects
+DETAIL:  drop cascades to view analysis.quality_flags
+drop cascades to view analysis.term_base
+drop cascades to view analysis.model_termination
+drop cascades to view analysis.model_reporting
+DROP VIEW
+DROP VIEW
+CREATE VIEW
+=== Cohort flow (snapshot :snapshot_date, window :window_start to :window_end) ===
+ step |                                     description                                     |   n    | change_from_previous 
+------+-------------------------------------------------------------------------------------+--------+----------------------
+    0 | All registered studies                                                              | 611764 |                     
+    1 | Interventional                                                                      | 466855 |              -144909
+    2 | Phase 2, Phase 2/3 or Phase 3                                                       | 116384 |              -350471
+    3 | At least one DRUG or BIOLOGICAL intervention                                        | 102981 |               -13403
+    4 | Start date present                                                                  | 102005 |                 -976
+    5 | Start date within window                                                            |  60840 |               -41165
+    6 | Final status COMPLETED, TERMINATED or WITHDRAWN (drops UNKNOWN, ongoing, suspended) |  46801 |               -14039
+(7 rows)
+
+CREATE VIEW
+
+=== Cohort by status ===
+ overall_status |   n   | pct  
+----------------+-------+------
+ COMPLETED      | 36431 | 77.8
+ TERMINATED     |  7734 | 16.5
+ WITHDRAWN      |  2636 |  5.6
+(3 rows)
+
+
+=== Cohort by phase ===
+     phase     |   n   
+---------------+-------
+ PHASE2        | 26791
+ PHASE3        | 17329
+ PHASE2/PHASE3 |  2681
+(3 rows)
+
+
+=== Results posting (COMPLETED or TERMINATED only) ===
+ overall_status |   n   | n_results_posted | pct_posted | n_missing_pcd 
+----------------+-------+------------------+------------+---------------
+ COMPLETED      | 36431 |            20378 |       55.9 |            25
+ TERMINATED     |  7734 |             4803 |       62.1 |             8
+(2 rows)
+
+
+=== Impossible or odd dates inside the cohort ===
+ pcd_before_start | results_before_pcd | pcd_after_snapshot 
+------------------+--------------------+--------------------
+                8 |                 99 |                 19
+(1 row)
+
+
+=== why_stopped populated (TERMINATED / WITHDRAWN) ===
+ overall_status |  n   | n_with_reason 
+----------------+------+---------------
+ TERMINATED     | 7734 |          7095
+ WITHDRAWN      | 2636 |          2235
+(2 rows)
+
+
+=== Intervention types across the cohort ===
+  intervention_type  | n_trials 
+---------------------+----------
+ DRUG                |    42512
+ BIOLOGICAL          |     5963
+ OTHER               |     4240
+ PROCEDURE           |     1419
+ RADIATION           |      906
+ DEVICE              |      692
+ BEHAVIORAL          |      384
+ DIETARY_SUPPLEMENT  |      279
+ COMBINATION_PRODUCT |       98
+ DIAGNOSTIC_TEST     |       82
+ GENETIC             |       59
+(11 rows)
+
+
+=== Lead sponsor class across the cohort ===
+ agency_class | n_trials 
+--------------+----------
+ INDUSTRY     |    24606
+ OTHER        |    19922
+ NIH          |      894
+ OTHER_GOV    |      592
+ NETWORK      |      516
+ FED          |      202
+ INDIV        |       61
+ UNKNOWN      |        8
+(8 rows)
+
