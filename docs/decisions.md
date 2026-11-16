@@ -43,6 +43,16 @@ Indexes did not survive the selective restore; 00b_indexes.sql rebuilds them.
 - Time to results (Kaplan-Meier, Cox): event = results first posted; trials without results are censored at the snapshot date 2026-11-15.
 - Applicability flag: use is_fda_regulated_drug and has_us_facility; check how complete is_fda_regulated_drug is for trials started before 2017.
 
+## Confirmed by owner (2026-11-16)
+- Late reporting = results first posted more than 12 months after primary completion.
+- WITHDRAWN trials are excluded from the primary termination model and reported as a sensitivity analysis.
+
+## Findings that shape the modelling
+- **Enrollment is not a valid predictor of termination.** AACT keeps one enrollment value, which becomes the actual count at completion; terminated trials have a median of 24 against 100 for completed ones. That is a consequence of the outcome, so it is described but left out of the termination model (reverse causation / leakage). Planned enrollment is not available in this snapshot.
+- **Rising termination share by start year (about 15% for 2008-2016 to 21-23% for 2019-2022) is partly a selection effect.** Only resolved trials are kept; for recent starts, short trials and early terminations resolve first. Plan: sensitivity analysis restricted to earlier start years (for example 2008-2018) and a time-to-termination model.
+- **is_fda_regulated_drug is 54.6% missing** (field exists for newer registrations only). The reporting-applicability flag uses has_us_facility (5.7% missing); FDA-regulated is a subset sensitivity analysis.
+- Descriptive signals (not yet adjusted): oncology 25.5% terminated vs infectious 14.4%; Phase 2 20.1% vs Phase 3 13.7%; industry 15.8%, other 19.9%, other government 9.5%.
+
 ## Log
 - 2026-11-16: question confirmed; snapshot restored and row count verified.
-- 2026-11-16: indexes built; cohort defined (46,801 trials); features script added.
+- 2026-11-16: indexes built; cohort defined (46,801 trials); features table built (46,801 rows); windows and quality scripts added.
